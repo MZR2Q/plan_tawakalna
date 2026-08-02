@@ -1,31 +1,16 @@
-<title>خطة إطلاق خدمات في توكلنا — جامعة حفر الباطن</title>
+<title>خطة إطلاق خدمات جامعة حفر الباطن في توكلنا</title>
 <style>
+  /* هوية فاتحة فقط — بألوان واجهة توكلنا الحقيقية */
   :root{
-    --bg:#f1efe9; --panel:#ffffff; --ink:#1a1614; --muted:#6a635c;
-    --line:#e6e0d5; --line-soft:#efe9de;
-    --tw:#0f9d63; --tw-2:#0b7a4d;              /* Tawakkalna green */
-    --uni:#6e2f2f; --uni-2:#a97e4e;            /* Hafr Al Batin maroon + tan */
-    --gold:#a97e4e; --good:#0f9d63;
-    --shadow:0 18px 50px rgba(26,22,20,.12); --shadow-sm:0 6px 18px rgba(26,22,20,.08);
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --bg:#0e1512; --panel:#16211c; --ink:#eef2ec; --muted:#9db0a6;
-      --line:#26332c; --line-soft:#1c2a23;
-      --tw:#2bbd82; --tw-2:#1c9e6c; --uni:#d59b9b; --uni-2:#d8b483;
-      --gold:#d8b483; --good:#2bbd82;
-      --shadow:0 22px 60px rgba(0,0,0,.5); --shadow-sm:0 6px 18px rgba(0,0,0,.35);
-    }
-  }
-  :root[data-theme="light"]{
-    --bg:#f1efe9; --panel:#ffffff; --ink:#1a1614; --muted:#6a635c; --line:#e6e0d5;
-    --line-soft:#efe9de; --tw:#0f9d63; --tw-2:#0b7a4d; --uni:#6e2f2f; --uni-2:#a97e4e;
-    --gold:#a97e4e; --good:#0f9d63; --shadow:0 18px 50px rgba(26,22,20,.12); --shadow-sm:0 6px 18px rgba(26,22,20,.08);
-  }
-  :root[data-theme="dark"]{
-    --bg:#0e1512; --panel:#16211c; --ink:#eef2ec; --muted:#9db0a6; --line:#26332c;
-    --line-soft:#1c2a23; --tw:#2bbd82; --tw-2:#1c9e6c; --uni:#d59b9b; --uni-2:#d8b483;
-    --gold:#d8b483; --good:#2bbd82; --shadow:0 22px 60px rgba(0,0,0,.5); --shadow-sm:0 6px 18px rgba(0,0,0,.35);
+    --bg:#ffffff;
+    --ink:#1e3a5f;          /* كحلي توكلنا */
+    --navy:#17335a;         /* بطاقة الخدمة الكحلية */
+    --navy-2:#1f4270;
+    --gold:#d9a842;         /* الذهبي داخل البطاقات */
+    --muted:#8b94a3;
+    --soft:#f6f8fa;
+    --line:#e8ecf1;
+    --tw:#0f9d63;           /* أخضر توكلنا للمسات الخفيفة */
   }
 
   *{ box-sizing:border-box; }
@@ -35,267 +20,251 @@
     font-family:"Segoe UI",Tahoma,"Noto Kufi Arabic",system-ui,sans-serif;
     line-height:1.7; -webkit-font-smoothing:antialiased;
   }
-  .wrap{ max-width:780px; margin:0 auto; padding:1.1rem 1.1rem 3rem; }
-  .logo-chip{ background:#fff; border-radius:14px; display:grid; place-items:center; }
+  .wrap{ max-width:720px; margin:0 auto; padding:1.5rem 1.15rem 3rem; }
 
-  /* ---------- Identity header ---------- */
-  .identity{
-    background:var(--panel); border:1px solid var(--line); border-radius:20px;
-    box-shadow:var(--shadow-sm); padding:1.2rem 1rem; text-align:center;
+  /* ---------- الترويسة ---------- */
+  .top{
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    padding-bottom:1.1rem; border-bottom:1px solid var(--line);
   }
-  .identity .uni-logo{ padding:.5rem .9rem; }
-  .identity .uni-logo img{ width:150px; max-width:60%; height:auto; display:block; }
-  .identity .divider{
-    height:1px; background:var(--line); margin:1rem auto; max-width:320px;
+  .top img{ display:block; height:auto; }
+  .top .uni{ width:104px; }
+  .top .tw-logo{ width:96px; }
+
+  .hero{ text-align:center; padding:1.8rem 0 .4rem; }
+  .hero .kicker{ font-size:.72rem; font-weight:700; letter-spacing:.1em; color:var(--tw); }
+  h1{ margin:.35rem 0 .4rem; font-size:clamp(1.35rem,4.8vw,1.7rem); font-weight:800; text-wrap:balance; }
+  .hero p{ margin:0 auto; max-width:44ch; color:var(--muted); font-size:.92rem; }
+
+  /* ---------- فريم الجوال (مطابق لواجهة توكلنا) ---------- */
+  .demo{ display:flex; justify-content:center; padding:1.8rem 0 .4rem; }
+  .phone{
+    width:290px; max-width:100%; border-radius:36px; padding:11px;
+    background:#0e1420;
+    box-shadow:0 18px 44px rgba(23,51,90,.22), inset 0 0 0 2px rgba(255,255,255,.06);
   }
-  .channel{
-    display:flex; align-items:center; justify-content:center; gap:.7rem; flex-wrap:wrap;
+  .screen{
+    position:relative; border-radius:27px; overflow:hidden; background:#fff;
+    aspect-ratio:9/18; display:flex; flex-direction:column;
   }
-  .channel .lbl{ font-size:.82rem; color:var(--muted); font-weight:600; }
-  .channel .logo-chip{ padding:.45rem .7rem; box-shadow:var(--shadow-sm); border:1px solid var(--line-soft); }
-  .channel .logo-chip img{ width:118px; height:auto; display:block; }
-
-  /* ---------- Title block ---------- */
-  .hero{ text-align:center; padding:1.9rem .5rem 1.1rem; }
-  .kicker{
-    display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.12em;
-    color:var(--tw); background:color-mix(in srgb,var(--tw) 12%,transparent);
-    padding:.3rem .8rem; border-radius:999px; margin-bottom:.9rem;
+  /* شريط الحالة */
+  .sbar{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:.55rem .9rem .2rem; font-size:.58rem; color:#333; font-weight:600;
   }
-  h1{ margin:.2rem 0; font-size:clamp(1.5rem,5.4vw,2.05rem); font-weight:800; text-wrap:balance; }
-  .hero p{ margin:.5rem auto 0; max-width:46ch; color:var(--muted); font-size:.98rem; }
-  .meta-row{ display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; margin-top:1.1rem; }
-  .pill{ font-size:.78rem; font-weight:600; color:var(--muted); background:var(--panel);
-    border:1px solid var(--line); border-radius:999px; padding:.35rem .75rem; }
-  .pill b{ color:var(--ink); }
-
-  /* ---------- Section labels ---------- */
-  .sec-head{ display:flex; align-items:center; gap:.7rem; margin:2.2rem .2rem 1rem; }
-  .sec-num{ flex:0 0 auto; width:30px; height:30px; border-radius:9px; display:grid; place-items:center;
-    background:var(--uni); color:#fff; font-weight:800; font-size:.9rem; }
-  .sec-head h2{ margin:0; font-size:1.15rem; font-weight:800; }
-  .sec-head .hint{ margin-inline-start:auto; font-size:.75rem; color:var(--muted); }
-
-  /* ---------- Service card ---------- */
-  .service{ background:var(--panel); border:1px solid var(--line); border-radius:22px;
-    box-shadow:var(--shadow); overflow:hidden; }
-  .service-top{ display:grid; grid-template-columns:1fr; gap:1.4rem; padding:1.4rem; }
-  @media(min-width:640px){ .service-top{ grid-template-columns:auto 1fr; align-items:center; } }
-
-  .phone{ justify-self:center; width:272px; max-width:100%; border-radius:34px; padding:10px;
-    background:linear-gradient(160deg,#1c2b25,#0d1712);
-    box-shadow:0 24px 50px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.05); }
-  .screen{ position:relative; border-radius:26px; overflow:hidden; background:#fbfbf9; color:#16211d; aspect-ratio:9/17.6; }
-  .notch{ position:absolute; top:8px; left:50%; transform:translateX(-50%); width:90px; height:20px;
-    background:#0d1712; border-radius:12px; z-index:3; }
-  .app-head{ background:linear-gradient(135deg,var(--tw),var(--tw-2)); color:#fff; padding:2.2rem .9rem .8rem; text-align:center; }
-  .app-head .brandline{ display:flex; align-items:center; justify-content:center; gap:.4rem; margin-bottom:.5rem; }
-  .app-head .brandline .chip{ background:#fff; border-radius:7px; padding:2px 5px; display:grid; place-items:center; }
-  .app-head .brandline .chip img{ height:14px; width:auto; display:block; }
-  .app-head .svc-name{ font-weight:800; font-size:1rem; }
-  .app-head .svc-sub{ font-size:.68rem; opacity:.9; margin-top:.15rem; }
-  .app-body{ padding:.85rem; display:flex; flex-direction:column; gap:.7rem; }
-
-  .stu{ display:flex; align-items:center; gap:.6rem; background:#fff; border:1px solid #ece7db; border-radius:14px; padding:.55rem .65rem; }
-  .stu .av{ width:38px; height:38px; border-radius:50%; flex:0 0 auto;
-    background:radial-gradient(circle at 30% 30%,#1a9c6b,#0b6b48); color:#fff; display:grid; place-items:center; font-weight:800; font-size:.9rem; }
-  .stu .info{ line-height:1.35; min-width:0; }
-  .stu .info b{ font-size:.82rem; display:block; }
-  .stu .info span{ font-size:.66rem; color:#7a857e; }
-
-  .gpa-card{ background:linear-gradient(135deg,#f3fbf7,#e7f6ef); border:1px solid #d3ecdf; border-radius:14px; padding:.8rem; text-align:center; }
-  .gpa-card .lbl{ font-size:.66rem; color:#4c7a64; font-weight:700; letter-spacing:.05em; }
-  .gpa-card .val{ font-size:1.85rem; font-weight:800; color:#0b6b48; line-height:1.1; }
-  .gpa-card .val small{ font-size:.8rem; color:#5c8a74; font-weight:700; }
-  .gpa-card .tier{ display:inline-block; margin-top:.25rem; font-size:.64rem; font-weight:700; color:#0b6b48; background:#cdeeddaa; padding:.15rem .55rem; border-radius:999px; }
-
-  .ring-row{ display:flex; align-items:center; gap:.7rem; background:#fff; border:1px solid #ece7db; border-radius:14px; padding:.6rem .65rem; }
-  .ring{ --p:68; flex:0 0 auto; width:56px; height:56px; border-radius:50%;
-    background:radial-gradient(closest-side,#fff 71%,transparent 72% 100%), conic-gradient(#0f9d63 calc(var(--p)*1%), #e4efe9 0);
-    display:grid; place-items:center; font-weight:800; font-size:.72rem; color:#0b6b48; }
-  .ring-row .rtxt b{ font-size:.78rem; display:block; }
-  .ring-row .rtxt span{ font-size:.65rem; color:#7a857e; }
-
-  .mini-list{ display:flex; flex-direction:column; gap:.3rem; }
-  .mini-list .mi{ display:flex; justify-content:space-between; font-size:.68rem; background:#fff; border:1px solid #ece7db; border-radius:9px; padding:.35rem .55rem; }
-  .mini-list .mi .g{ font-weight:800; color:#0b6b48; }
-
-  .svc-intro h3{ margin:0 0 .5rem; font-size:1.2rem; font-weight:800; }
-  .svc-intro .desc{ color:var(--muted); margin:0 0 1rem; font-size:.95rem; }
-  .shows{ display:flex; flex-direction:column; gap:.55rem; }
-  .shows .row{ display:flex; align-items:flex-start; gap:.55rem; font-size:.9rem; }
-  .shows .row .ic{ flex:0 0 auto; width:22px; height:22px; border-radius:7px; margin-top:.1rem;
-    background:color-mix(in srgb,var(--tw) 15%,transparent); color:var(--tw); display:grid; place-items:center; font-weight:800; font-size:.8rem; }
-
-  .req-grid{ display:grid; grid-template-columns:1fr; gap:.8rem; }
-  @media(min-width:560px){ .req-grid{ grid-template-columns:1fr 1fr; } }
-  .req{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:1rem; box-shadow:var(--shadow-sm); }
-  .req .tag{ display:inline-flex; align-items:center; gap:.4rem; font-size:.7rem; font-weight:700;
-    color:var(--uni); background:color-mix(in srgb,var(--uni) 12%,transparent); padding:.25rem .6rem; border-radius:999px; margin-bottom:.55rem; }
-  .req h4{ margin:.1rem 0 .35rem; font-size:1rem; font-weight:800; }
-  .req p{ margin:0; font-size:.86rem; color:var(--muted); }
-  .req .own{ margin-top:.6rem; font-size:.74rem; color:var(--ink); font-weight:600; }
-  .req .own em{ color:var(--tw); font-style:normal; }
-
-  .sys{ display:flex; flex-wrap:wrap; gap:.6rem; }
-  .sys .chip{ flex:1 1 150px; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:.75rem .85rem; box-shadow:var(--shadow-sm); }
-  .sys .chip b{ display:block; font-size:.92rem; }
-  .sys .chip span{ font-size:.76rem; color:var(--muted); }
-
-  /* ---------- Footer with SDAIA ---------- */
-  .footer{
-    margin-top:2.4rem; background:var(--panel); border:1px solid var(--line); border-radius:20px;
-    box-shadow:var(--shadow-sm); padding:1.3rem 1rem; text-align:center;
+  /* ترويسة الخدمة: X + الاسم + كبسولة القوائم */
+  .apphead{
+    display:flex; align-items:center; gap:.45rem; padding:.55rem .7rem .4rem;
   }
-  .footer .lbl{ font-size:.82rem; color:var(--muted); font-weight:600; margin-bottom:.7rem; }
-  .footer .logo-chip{ display:inline-grid; padding:.55rem .9rem; border:1px solid var(--line-soft); box-shadow:var(--shadow-sm); }
-  .footer .logo-chip img{ width:210px; max-width:80%; height:auto; display:block; }
-  .footer .fine{ margin-top:1rem; font-size:.72rem; color:var(--muted); }
+  .x-btn{
+    flex:0 0 auto; width:30px; height:30px; border:1.6px solid #23324a; border-radius:50%;
+    display:grid; place-items:center; color:#23324a; font-size:.8rem; font-weight:700;
+  }
+  .apphead .ttl{
+    flex:1; min-width:0; font-size:.78rem; font-weight:700; color:#1e3a5f;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .caps{
+    flex:0 0 auto; display:flex; align-items:center; gap:.5rem;
+    border:1.6px solid #23324a; border-radius:999px; padding:.28rem .6rem; color:#23324a;
+  }
+  .caps .i{ font-size:.72rem; line-height:1; }
+  .caps .sep{ width:1px; height:12px; background:#23324a55; }
+
+  /* اسم الخدمة + شعار الجامعة */
+  .svc-row{
+    display:flex; align-items:flex-start; justify-content:space-between;
+    padding:.9rem 1rem .3rem;
+  }
+  .svc-row .t .g{ font-size:.62rem; color:#9aa3b0; }
+  .svc-row .t .n{ font-size:.86rem; font-weight:800; color:#1e3a5f; line-height:1.4; }
+  .svc-row img{ width:44px; height:auto; display:block; }
+
+  /* البطاقة الكحلية */
+  .navy-card{
+    margin:.8rem .8rem; background:var(--navy); border-radius:20px;
+    padding:1rem .95rem 1.05rem; color:#fff; text-align:right;
+  }
+  .navy-card .who{ font-size:.72rem; opacity:.85; }
+  .navy-card .who b{ font-size:.8rem; color:#fff; display:block; opacity:1; }
+  .gpa-line{
+    display:flex; align-items:center; justify-content:space-between; margin-top:.75rem;
+  }
+  .gpa-line .lbl{ font-size:.68rem; color:var(--gold); font-weight:700; }
+  .gpa-line .v{ font-size:1.5rem; font-weight:800; color:var(--gold); }
+  .gpa-line .v small{ font-size:.7rem; font-weight:700; color:#e8c887; }
+  .bar{
+    margin-top:.8rem; height:7px; border-radius:99px; background:#ffffff22; overflow:hidden;
+  }
+  .bar i{ display:block; height:100%; width:68%; background:var(--gold); border-radius:99px; }
+  .bar-lbl{ display:flex; justify-content:space-between; margin-top:.4rem; font-size:.62rem; color:#c9d3e2; }
+  .bar-lbl b{ color:var(--gold); }
+
+  .demo-cap{ text-align:center; font-size:.74rem; color:var(--muted); margin:.6rem 0 0; }
+
+  /* ---------- الخدمات ---------- */
+  .sec{ margin-top:2.3rem; }
+  .sec > h2{
+    margin:0 0 1.1rem; font-size:1.05rem; font-weight:800; color:var(--ink);
+    display:flex; align-items:center; gap:.55rem;
+  }
+  .sec > h2::after{ content:""; flex:1; height:1px; background:var(--line); }
+
+  .svc{ border:1px solid var(--line); border-radius:16px; padding:1rem 1.05rem; margin-bottom:.85rem; background:#fff; }
+  .svc .head{ display:flex; align-items:baseline; gap:.6rem; }
+  .svc .num{
+    flex:0 0 auto; width:24px; height:24px; border-radius:8px; display:grid; place-items:center;
+    background:var(--navy); color:var(--gold); font-size:.78rem; font-weight:800; align-self:center;
+  }
+  .svc h3{ margin:0; font-size:.98rem; font-weight:800; }
+  .svc .aud{
+    margin-inline-start:auto; font-size:.66rem; font-weight:700; padding:.15rem .55rem;
+    border-radius:99px; background:var(--soft); color:var(--muted); white-space:nowrap;
+  }
+  .svc .desc{ margin:.45rem 0 .65rem; font-size:.85rem; color:var(--muted); }
+  .req-ttl{ font-size:.72rem; font-weight:800; color:var(--tw); margin-bottom:.35rem; }
+  .svc ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.35rem; }
+  .svc li{
+    position:relative; padding-inline-start:1rem; font-size:.83rem; color:var(--ink);
+  }
+  .svc li::before{
+    content:""; position:absolute; right:0; top:.62em; width:6px; height:6px;
+    border-radius:2px; background:var(--gold);
+  }
+  .svc li .src{ color:var(--muted); font-size:.78rem; }
+
+  /* ---------- التذييل ---------- */
+  .foot{
+    margin-top:2.4rem; padding-top:1.2rem; border-top:1px solid var(--line);
+    text-align:center;
+  }
+  .foot .lbl{ font-size:.74rem; color:var(--muted); margin-bottom:.5rem; }
+  .foot img{ width:170px; max-width:70%; height:auto; }
+  .foot .fine{ margin-top:.8rem; font-size:.68rem; color:var(--muted); }
 </style>
 
 <div class="wrap">
 
-  <!-- identity header -->
-  <div class="identity">
-    <div class="logo-chip uni-logo" style="display:inline-grid;">
-      <img src="assets/university.png" alt="شعار جامعة حفر الباطن" />
-    </div>
-    <div class="divider"></div>
-    <div class="channel">
-      <span class="lbl">الخطة تُطلق عبر المنصّة الوطنية</span>
-      <span class="logo-chip"><img src="assets/tawakkalna.png" alt="شعار تطبيق توكلنا" /></span>
-    </div>
+  <!-- الترويسة -->
+  <div class="top">
+    <img class="uni" src="assets/university.png" alt="جامعة حفر الباطن" />
+    <img class="tw-logo" src="assets/tawakkalna.png" alt="توكلنا" />
   </div>
 
-  <!-- hero -->
   <header class="hero">
-    <span class="kicker">خطة إطلاق خدمات رقمية</span>
-    <h1>خدمات جامعة حفر الباطن في تطبيق توكلنا</h1>
-    <p>خطة مقترحة لإطلاق ١٠ خدمات رقمية للطلاب والموظفين عبر منصّة توكلنا، اعتمادًا على أنظمة الجامعة القائمة.</p>
-    <div class="meta-row">
-      <span class="pill">عدد الخدمات: <b>١٠</b></span>
-      <span class="pill">هذه الوثيقة: <b>نموذج خدمة واحدة</b></span>
-      <span class="pill">إعداد: <b>الإدارة الرقمية</b></span>
-    </div>
+    <span class="kicker">خطة مقترحة</span>
+    <h1>إطلاق خدمات جامعة حفر الباطن في تطبيق توكلنا</h1>
+    <p>٦ خدمات رقمية للطلاب والموظفين تُبنى على أنظمة الجامعة القائمة، مع المتطلبات الفعلية لكل خدمة.</p>
   </header>
 
-  <!-- service example -->
-  <div class="sec-head">
-    <span class="sec-num">١</span>
-    <h2>خدمة: حالة المعدل التراكمي</h2>
-    <span class="hint">نموذج تفصيلي</span>
+  <!-- معاينة الخدمة داخل توكلنا -->
+  <div class="demo">
+    <div class="phone" aria-label="معاينة الخدمة داخل توكلنا">
+      <div class="screen">
+        <div class="sbar"><span>stc &nbsp;٥:٣٨</span><span>▂▄▆ ●</span></div>
+        <div class="apphead">
+          <span class="x-btn">✕</span>
+          <span class="ttl">حالة المعدل التراكمي جامعة حفر الباطن</span>
+          <span class="caps"><span class="i">☰</span><span class="sep"></span><span class="i">⊞</span></span>
+        </div>
+        <div class="svc-row">
+          <div class="t">
+            <div class="g">الخدمات</div>
+            <div class="n">حالة المعدل التراكمي</div>
+          </div>
+          <img src="assets/university.png" alt="" />
+        </div>
+        <div class="navy-card">
+          <div class="who">
+            <b>عبدالله محمد الشهري</b>
+            ٤٤١٠٢٢٣٧ · الأمن السيبراني CYP
+          </div>
+          <div class="gpa-line">
+            <span class="lbl">المعدل التراكمي</span>
+            <span class="v">٤٫٥٢ <small>من ٥</small></span>
+          </div>
+          <div class="bar"><i></i></div>
+          <div class="bar-lbl"><span>إنجاز الخطة الدراسية</span><b>٦٨٪</b></div>
+        </div>
+      </div>
+    </div>
   </div>
+  <p class="demo-cap">نموذج شكل الخدمة داخل توكلنا — خدمة رقم ١</p>
 
-  <section class="service">
-    <div class="service-top">
+  <!-- الخدمات الست -->
+  <section class="sec">
+    <h2>الخدمات المقترحة ومتطلباتها</h2>
 
-      <div class="phone" aria-label="معاينة الخدمة داخل تطبيق توكلنا">
-        <div class="screen">
-          <div class="notch"></div>
-          <div class="app-head">
-            <div class="brandline">
-              <span class="chip"><img src="assets/tawakkalna.png" alt="توكلنا" /></span>
-            </div>
-            <div class="svc-name">حالة المعدل التراكمي</div>
-            <div class="svc-sub">جامعة حفر الباطن · عبر توكلنا</div>
-          </div>
-          <div class="app-body">
-            <div class="stu">
-              <div class="av">ع</div>
-              <div class="info">
-                <b>عبدالله محمد الشهري</b>
-                <span>٤٤١٠٢٢٣٧ · الأمن السيبراني (CYP)</span>
-              </div>
-            </div>
+    <div class="svc">
+      <div class="head"><span class="num">١</span><h3>حالة المعدل التراكمي</h3><span class="aud">طلاب</span></div>
+      <p class="desc">اسم الطالب، معدله التراكمي، ونسبة إنجازه من الخطة الدراسية.</p>
+      <div class="req-ttl">المتطلبات</div>
+      <ul>
+        <li>View Database من نظام SIS <span class="src">— عمادة القبول والتسجيل</span></li>
+        <li>تحويل الخطط الدراسية من PDF إلى بيانات قابلة للمقارنة <span class="src">— الأقسام الأكاديمية</span></li>
+        <li>تطوير الخدمة وتصميم الواجهة</li>
+      </ul>
+    </div>
 
-            <div class="gpa-card">
-              <div class="lbl">المعدل التراكمي</div>
-              <div class="val">٤٫٥٢ <small>/ ٥٫٠٠</small></div>
-              <span class="tier">تقدير: ممتاز مرتفع</span>
-            </div>
+    <div class="svc">
+      <div class="head"><span class="num">٢</span><h3>الجدول الدراسي</h3><span class="aud">طلاب</span></div>
+      <p class="desc">مواد الفصل الحالي مع أوقات المحاضرات والقاعات.</p>
+      <div class="req-ttl">المتطلبات</div>
+      <ul>
+        <li>View Database لجداول الشُعب والأوقات من SIS <span class="src">— عمادة القبول والتسجيل</span></li>
+        <li>تطوير الخدمة وتصميم الواجهة</li>
+      </ul>
+    </div>
 
-            <div class="ring-row">
-              <div class="ring" style="--p:68">٦٨٪</div>
-              <div class="rtxt">
-                <b>نسبة إنجاز الخطة الدراسية</b>
-                <span>٩٤ من ١٣٨ ساعة معتمدة</span>
-              </div>
-            </div>
+    <div class="svc">
+      <div class="head"><span class="num">٣</span><h3>وثيقة إثبات انتظام</h3><span class="aud">طلاب</span></div>
+      <p class="desc">شهادة رقمية تثبت أن الطالب مسجّل ومنتظم في الفصل الحالي.</p>
+      <div class="req-ttl">المتطلبات</div>
+      <ul>
+        <li>View Database لحالة القيد من SIS <span class="src">— عمادة القبول والتسجيل</span></li>
+        <li>اعتماد قالب الوثيقة مع رمز تحقق (QR) <span class="src">— الإدارة المختصة</span></li>
+        <li>تطوير الخدمة وتصميم الواجهة</li>
+      </ul>
+    </div>
 
-            <div class="mini-list">
-              <div class="mi"><span>أمن الشبكات</span><span class="g">A+</span></div>
-              <div class="mi"><span>التشفير التطبيقي</span><span class="g">A</span></div>
-              <div class="mi"><span>تحليل البرمجيات الخبيثة</span><span class="g">A+</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="svc">
+      <div class="head"><span class="num">٤</span><h3>سجل الحضور والانصراف</h3><span class="aud">موظفون</span></div>
+      <p class="desc">بصمات الموظف اليومية وملخص الدوام الشهري.</p>
+      <div class="req-ttl">المتطلبات</div>
+      <ul>
+        <li>View Database من نظام حاضر <span class="src">— الموارد البشرية</span></li>
+        <li>تطوير الخدمة وتصميم الواجهة</li>
+      </ul>
+    </div>
 
-      <div class="svc-intro">
-        <h3>ماذا تعرض للطالب؟</h3>
-        <p class="desc">خدمة تُظهر للطالب حالته الأكاديمية بلمحة واحدة داخل توكلنا دون الحاجة لفتح نظام القبول والتسجيل.</p>
-        <div class="shows">
-          <div class="row"><span class="ic">✓</span><div>الاسم والرقم الجامعي والتخصّص</div></div>
-          <div class="row"><span class="ic">✓</span><div>المعدل التراكمي والتقدير الحالي</div></div>
-          <div class="row"><span class="ic">✓</span><div>نسبة إنجاز الخطة الدراسية (٪) بمقارنة المواد المجتازة بالخطة</div></div>
-        </div>
-      </div>
+    <div class="svc">
+      <div class="head"><span class="num">٥</span><h3>تعريف بالراتب</h3><span class="aud">موظفون</span></div>
+      <p class="desc">شهادة تعريف بالراتب والمنصب وجهة العمل، جاهزة للمشاركة.</p>
+      <div class="req-ttl">المتطلبات</div>
+      <ul>
+        <li>View Database للرواتب والمناصب من نظام جديد <span class="src">— الموارد البشرية</span></li>
+        <li>اعتماد نموذج التعريف مع رمز تحقق (QR) <span class="src">— الإدارة المختصة</span></li>
+        <li>تطوير الخدمة وتصميم الواجهة</li>
+      </ul>
+    </div>
+
+    <div class="svc">
+      <div class="head"><span class="num">٦</span><h3>البطاقة الوظيفية الرقمية</h3><span class="aud">موظفون</span></div>
+      <p class="desc">بطاقة رقمية باسم الموظف ومنصبه وجهته ورقمه الوظيفي.</p>
+      <div class="req-ttl">المتطلبات</div>
+      <ul>
+        <li>View Database لبيانات الموظفين من نظام جديد <span class="src">— الموارد البشرية</span></li>
+        <li>تصميم البطاقة مع رمز تحقق (QR)</li>
+        <li>تطوير الخدمة وتصميم الواجهة</li>
+      </ul>
     </div>
   </section>
 
-  <!-- requirements -->
-  <div class="sec-head">
-    <span class="sec-num">◆</span>
-    <h2>متطلبات الخدمة</h2>
-  </div>
-
-  <div class="req-grid">
-    <div class="req">
-      <span class="tag">مصدر البيانات</span>
-      <h4>View Database من نظام SIS</h4>
-      <p>إنشاء «فيو» قاعدة بيانات من نظام القبول والتسجيل (SIS) يضم بيانات الطالب والمواد والدرجات.</p>
-      <div class="own">الجهة المزوّدة: <em>عمادة القبول والتسجيل</em></div>
-    </div>
-
-    <div class="req">
-      <span class="tag">مرجع الحساب</span>
-      <h4>الخطة الدراسية (PDF)</h4>
-      <p>اعتماد الخطة الدراسية للتخصّص كمرجع لحساب نسبة الإنجاز بمقارنتها بالمواد المجتازة.</p>
-      <div class="own">المصدر: <em>الأقسام الأكاديمية</em></div>
-    </div>
-
-    <div class="req">
-      <span class="tag">التطوير</span>
-      <h4>ربط وتطوير الخدمة</h4>
-      <p>بناء واجهة برمجية (API) تربط الفيو بتوكلنا، مع منطق حساب المعدل ونسبة الإنجاز.</p>
-      <div class="own">المنفّذ: <em>فريق التطوير</em></div>
-    </div>
-
-    <div class="req">
-      <span class="tag">التصميم</span>
-      <h4>تصميم الواجهة (UI/UX)</h4>
-      <p>تصميم واجهة الخدمة داخل توكلنا باللغة العربية واتجاه RTL بما يوافق هوية المنصّة.</p>
-      <div class="own">المنفّذ: <em>فريق تجربة المستخدم</em></div>
-    </div>
-  </div>
-
-  <!-- available systems -->
-  <div class="sec-head">
-    <span class="sec-num">≡</span>
-    <h2>الأنظمة المتاحة للاستفادة منها</h2>
-  </div>
-  <div class="sys">
-    <div class="chip"><b>نظام SIS</b><span>القبول والتسجيل: الطلاب، المواد، الدرجات</span></div>
-    <div class="chip"><b>نظام جديد</b><span>بيانات الموظفين، الرواتب، المناصب، الجهات</span></div>
-    <div class="chip"><b>نظام حاضر</b><span>حضور وانصراف الموظفين</span></div>
-    <div class="chip"><b>الخطط الدراسية</b><span>ملفات PDF لكل تخصّص</span></div>
-  </div>
-
-  <!-- footer / SDAIA -->
-  <div class="footer">
+  <!-- التذييل -->
+  <div class="foot">
     <div class="lbl">منصّة توكلنا مقدَّمة من</div>
-    <span class="logo-chip"><img src="assets/sdaia.png" alt="الهيئة السعودية للبيانات والذكاء الاصطناعي (سدايا)" /></span>
-    <div class="fine">البيانات المعروضة في النموذج توضيحية فقط · جميع الشعارات ملك لأصحابها.</div>
+    <img src="assets/sdaia.png" alt="سدايا — الهيئة السعودية للبيانات والذكاء الاصطناعي" />
+    <div class="fine">البيانات المعروضة في النموذج توضيحية فقط · جميع الشعارات ملك لأصحابها</div>
   </div>
 
 </div>
