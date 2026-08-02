@@ -122,6 +122,12 @@
     border-radius:99px; background:var(--soft); color:var(--muted); white-space:nowrap;
   }
   .svc .desc{ margin:.45rem 0 .65rem; font-size:.85rem; color:var(--muted); }
+  .aud-line{
+    display:flex; align-items:center; gap:.4rem; font-size:.78rem; margin-bottom:.6rem;
+    color:var(--muted);
+  }
+  .aud-line b{ color:var(--navy); font-weight:700; }
+  .aud-line::before{ content:"◉"; font-size:.6rem; color:var(--tw); }
   .req-ttl{ font-size:.72rem; font-weight:800; color:var(--tw); margin-bottom:.35rem; }
   .svc ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.35rem; }
   .svc li{
@@ -196,40 +202,32 @@
     <h2>الخدمات المقترحة ومتطلباتها</h2>
 
     <div class="svc">
-      <div class="head"><span class="num">١</span><h3>حالة المعدل التراكمي</h3><span class="aud">طلاب</span></div>
+      <div class="head"><span class="num">١</span><h3>حالة المعدل التراكمي</h3><span class="aud">سجلات الطلاب</span></div>
       <p class="desc">اسم الطالب، معدله التراكمي، ونسبة إنجازه من الخطة الدراسية.</p>
+      <div class="aud-line">الفئة المستهدفة: <b>طلاب وطالبات الجامعة</b></div>
       <div class="req-ttl">المتطلبات</div>
       <ul>
-        <li>View Database من نظام SIS <span class="src">— عمادة القبول والتسجيل</span></li>
+        <li>View Database من نظام سجلات الطلاب <span class="src">— عمادة القبول والتسجيل</span></li>
         <li>تحويل الخطط الدراسية من PDF إلى بيانات قابلة للمقارنة <span class="src">— الأقسام الأكاديمية</span></li>
         <li>تطوير الخدمة وتصميم الواجهة</li>
       </ul>
     </div>
 
     <div class="svc">
-      <div class="head"><span class="num">٢</span><h3>الجدول الدراسي</h3><span class="aud">طلاب</span></div>
+      <div class="head"><span class="num">٢</span><h3>الجدول الدراسي</h3><span class="aud">سجلات الطلاب</span></div>
       <p class="desc">مواد الفصل الحالي مع أوقات المحاضرات والقاعات.</p>
+      <div class="aud-line">الفئة المستهدفة: <b>طلاب وطالبات الجامعة</b></div>
       <div class="req-ttl">المتطلبات</div>
       <ul>
-        <li>View Database لجداول الشُعب والأوقات من SIS <span class="src">— عمادة القبول والتسجيل</span></li>
+        <li>View Database لجداول الشُعب والأوقات من نظام سجلات الطلاب <span class="src">— عمادة القبول والتسجيل</span></li>
         <li>تطوير الخدمة وتصميم الواجهة</li>
       </ul>
     </div>
 
     <div class="svc">
-      <div class="head"><span class="num">٣</span><h3>وثيقة إثبات انتظام</h3><span class="aud">طلاب</span></div>
-      <p class="desc">شهادة رقمية تثبت أن الطالب مسجّل ومنتظم في الفصل الحالي.</p>
-      <div class="req-ttl">المتطلبات</div>
-      <ul>
-        <li>View Database لحالة القيد من SIS <span class="src">— عمادة القبول والتسجيل</span></li>
-        <li>اعتماد قالب الوثيقة مع رمز تحقق (QR) <span class="src">— الإدارة المختصة</span></li>
-        <li>تطوير الخدمة وتصميم الواجهة</li>
-      </ul>
-    </div>
-
-    <div class="svc">
-      <div class="head"><span class="num">٤</span><h3>سجل الحضور والانصراف</h3><span class="aud">موظفون</span></div>
+      <div class="head"><span class="num">٣</span><h3>سجل الحضور والانصراف</h3><span class="aud">حاضر</span></div>
       <p class="desc">بصمات الموظف اليومية وملخص الدوام الشهري.</p>
+      <div class="aud-line">الفئة المستهدفة: <b>جميع منسوبي الجامعة</b></div>
       <div class="req-ttl">المتطلبات</div>
       <ul>
         <li>View Database من نظام حاضر <span class="src">— الموارد البشرية</span></li>
@@ -238,23 +236,37 @@
     </div>
 
     <div class="svc">
-      <div class="head"><span class="num">٥</span><h3>تعريف بالراتب</h3><span class="aud">موظفون</span></div>
+      <div class="head"><span class="num">٤</span><h3>تعريف بالراتب</h3><span class="aud">جدير</span></div>
       <p class="desc">شهادة تعريف بالراتب والمنصب وجهة العمل، جاهزة للمشاركة.</p>
+      <div class="aud-line">الفئة المستهدفة: <b>جميع منسوبي الجامعة</b></div>
       <div class="req-ttl">المتطلبات</div>
       <ul>
-        <li>View Database للرواتب والمناصب من نظام جديد <span class="src">— الموارد البشرية</span></li>
-        <li>اعتماد نموذج التعريف مع رمز تحقق (QR) <span class="src">— الإدارة المختصة</span></li>
+        <li>View Database للرواتب والبيانات الوظيفية من نظام جدير <span class="src">— الإدارة المالية والإدارية</span></li>
+        <li>اعتماد نموذج التعريف مع رمز تحقق (QR) <span class="src">— الموارد البشرية</span></li>
         <li>تطوير الخدمة وتصميم الواجهة</li>
       </ul>
     </div>
 
     <div class="svc">
-      <div class="head"><span class="num">٦</span><h3>البطاقة الوظيفية الرقمية</h3><span class="aud">موظفون</span></div>
-      <p class="desc">بطاقة رقمية باسم الموظف ومنصبه وجهته ورقمه الوظيفي.</p>
+      <div class="head"><span class="num">٥</span><h3>متابعة المعاملات الإدارية</h3><span class="aud">تمام</span></div>
+      <p class="desc">حالة المعاملات الواردة والصادرة للموظف وإشعار عند تحديثها.</p>
+      <div class="aud-line">الفئة المستهدفة: <b>الموظفون الإداريون وأصحاب الصلاحيات</b></div>
       <div class="req-ttl">المتطلبات</div>
       <ul>
-        <li>View Database لبيانات الموظفين من نظام جديد <span class="src">— الموارد البشرية</span></li>
-        <li>تصميم البطاقة مع رمز تحقق (QR)</li>
+        <li>View Database لحالة المعاملات من نظام تمام <span class="src">— الاتصالات الإدارية</span></li>
+        <li>تحديد صلاحيات العرض (كلٌّ يرى معاملاته فقط) <span class="src">— أمن المعلومات</span></li>
+        <li>تطوير الخدمة وتصميم الواجهة</li>
+      </ul>
+    </div>
+
+    <div class="svc">
+      <div class="head"><span class="num">٦</span><h3>جلسات اللجان والمجالس</h3><span class="aud">ديوان</span></div>
+      <p class="desc">مواعيد الجلسات القادمة وجداول أعمالها لأعضاء اللجان.</p>
+      <div class="aud-line">الفئة المستهدفة: <b>أعضاء اللجان والمجالس</b></div>
+      <div class="req-ttl">المتطلبات</div>
+      <ul>
+        <li>View Database للجلسات والعضويات من نظام ديوان <span class="src">— أمانة المجالس واللجان</span></li>
+        <li>ربط إشعارات التذكير بموعد الجلسة</li>
         <li>تطوير الخدمة وتصميم الواجهة</li>
       </ul>
     </div>
