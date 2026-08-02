@@ -1,0 +1,372 @@
+<title>خطة إطلاق خدمات في توكلنا — جامعة روباطن</title>
+<style>
+  :root{
+    --bg:#f2efe8; --panel:#ffffff; --ink:#16211d; --muted:#5d6b64;
+    --line:#e3ddce; --line-soft:#eee9dd;
+    --tw:#0a8f5f; --tw-2:#0b7a52; --uni:#14294d; --gold:#c19a2e;
+    --good:#0a8f5f; --shadow:0 18px 50px rgba(20,33,29,.12);
+    --shadow-sm:0 6px 18px rgba(20,33,29,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0c1512; --panel:#12201b; --ink:#eef2ec; --muted:#9db0a6;
+      --line:#24352d; --line-soft:#1b2a23;
+      --tw:#25b57f; --tw-2:#1c9e6c; --uni:#8fb0e6; --gold:#e0bd52;
+      --good:#25b57f; --shadow:0 22px 60px rgba(0,0,0,.5);
+      --shadow-sm:0 6px 18px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#f2efe8; --panel:#ffffff; --ink:#16211d; --muted:#5d6b64;
+    --line:#e3ddce; --line-soft:#eee9dd; --tw:#0a8f5f; --tw-2:#0b7a52;
+    --uni:#14294d; --gold:#c19a2e; --good:#0a8f5f;
+    --shadow:0 18px 50px rgba(20,33,29,.12); --shadow-sm:0 6px 18px rgba(20,33,29,.08);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0c1512; --panel:#12201b; --ink:#eef2ec; --muted:#9db0a6;
+    --line:#24352d; --line-soft:#1b2a23; --tw:#25b57f; --tw-2:#1c9e6c;
+    --uni:#8fb0e6; --gold:#e0bd52; --good:#25b57f;
+    --shadow:0 22px 60px rgba(0,0,0,.5); --shadow-sm:0 6px 18px rgba(0,0,0,.35);
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    direction:rtl; background:var(--bg); color:var(--ink);
+    font-family:"Segoe UI",Tahoma,"Noto Kufi Arabic",system-ui,sans-serif;
+    line-height:1.7; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:760px; margin:0 auto; padding:1.1rem 1.1rem 3rem; }
+
+  /* ---------- Header / brand bar ---------- */
+  .brandbar{
+    display:flex; align-items:center; justify-content:space-between; gap:.75rem;
+    background:var(--panel); border:1px solid var(--line); border-radius:18px;
+    padding:.8rem 1rem; box-shadow:var(--shadow-sm);
+  }
+  .brand{ display:flex; align-items:center; gap:.6rem; min-width:0; }
+  .brand .name{ display:flex; flex-direction:column; line-height:1.25; min-width:0; }
+  .brand .name b{ font-size:.98rem; font-weight:800; white-space:nowrap; }
+  .brand .name span{ font-size:.72rem; color:var(--muted); white-space:nowrap; }
+  .brand-sep{ width:1px; align-self:stretch; background:var(--line); }
+  .emblem{ flex:0 0 auto; }
+
+  /* ---------- Title block ---------- */
+  .hero{ text-align:center; padding:1.9rem .5rem 1.2rem; }
+  .kicker{
+    display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.12em;
+    color:var(--tw); background:color-mix(in srgb,var(--tw) 12%,transparent);
+    padding:.3rem .8rem; border-radius:999px; margin-bottom:.9rem;
+  }
+  h1{ margin:.2rem 0; font-size:clamp(1.55rem,5.5vw,2.1rem); font-weight:800; text-wrap:balance; }
+  .hero p{ margin:.5rem auto 0; max-width:46ch; color:var(--muted); font-size:.98rem; }
+
+  .meta-row{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; margin-top:1.1rem;
+  }
+  .pill{
+    font-size:.78rem; font-weight:600; color:var(--muted);
+    background:var(--panel); border:1px solid var(--line); border-radius:999px; padding:.35rem .75rem;
+  }
+  .pill b{ color:var(--ink); }
+
+  /* ---------- Section labels ---------- */
+  .sec-head{ display:flex; align-items:center; gap:.7rem; margin:2.2rem .2rem 1rem; }
+  .sec-num{
+    flex:0 0 auto; width:30px; height:30px; border-radius:9px; display:grid; place-items:center;
+    background:var(--uni); color:#fff; font-weight:800; font-size:.9rem;
+  }
+  .sec-head h2{ margin:0; font-size:1.15rem; font-weight:800; }
+  .sec-head .hint{ margin-inline-start:auto; font-size:.75rem; color:var(--muted); }
+
+  /* ---------- Service card ---------- */
+  .service{
+    background:var(--panel); border:1px solid var(--line); border-radius:22px;
+    box-shadow:var(--shadow); overflow:hidden;
+  }
+  .service-top{
+    display:grid; grid-template-columns:1fr; gap:1.4rem; padding:1.4rem;
+  }
+  @media(min-width:620px){ .service-top{ grid-template-columns:auto 1fr; align-items:center; } }
+
+  /* phone mockup */
+  .phone{
+    justify-self:center; width:270px; max-width:100%;
+    border-radius:34px; padding:10px;
+    background:linear-gradient(160deg,#1c2b25,#0d1712);
+    box-shadow:0 24px 50px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.05);
+  }
+  .screen{
+    position:relative; border-radius:26px; overflow:hidden; background:#fbfbf9;
+    color:#16211d; aspect-ratio:9/17.5;
+  }
+  .notch{
+    position:absolute; top:8px; left:50%; transform:translateX(-50%);
+    width:90px; height:20px; background:#0d1712; border-radius:12px; z-index:3;
+  }
+  .app-head{
+    background:linear-gradient(135deg,var(--tw),var(--tw-2)); color:#fff;
+    padding:2.2rem .9rem .9rem; text-align:center;
+  }
+  .app-head .svc-name{ font-weight:800; font-size:1rem; }
+  .app-head .svc-sub{ font-size:.68rem; opacity:.9; margin-top:.15rem; }
+  .app-body{ padding:.85rem; display:flex; flex-direction:column; gap:.7rem; }
+
+  .stu{
+    display:flex; align-items:center; gap:.6rem; background:#fff; border:1px solid #ece7db;
+    border-radius:14px; padding:.55rem .65rem;
+  }
+  .stu .av{
+    width:38px; height:38px; border-radius:50%; flex:0 0 auto;
+    background:radial-gradient(circle at 30% 30%,#1a9c6b,#0b6b48); color:#fff;
+    display:grid; place-items:center; font-weight:800; font-size:.9rem;
+  }
+  .stu .info{ line-height:1.35; min-width:0; }
+  .stu .info b{ font-size:.82rem; display:block; }
+  .stu .info span{ font-size:.66rem; color:#7a857e; }
+
+  .gpa-card{
+    background:linear-gradient(135deg,#f3fbf7,#e7f6ef); border:1px solid #d3ecdf;
+    border-radius:14px; padding:.8rem; text-align:center;
+  }
+  .gpa-card .lbl{ font-size:.66rem; color:#4c7a64; font-weight:700; letter-spacing:.05em; }
+  .gpa-card .val{ font-size:1.85rem; font-weight:800; color:#0b6b48; line-height:1.1; }
+  .gpa-card .val small{ font-size:.8rem; color:#5c8a74; font-weight:700; }
+  .gpa-card .tier{
+    display:inline-block; margin-top:.25rem; font-size:.64rem; font-weight:700; color:#0b6b48;
+    background:#cdeeddaa; padding:.15rem .55rem; border-radius:999px;
+  }
+
+  .ring-row{ display:flex; align-items:center; gap:.7rem; background:#fff; border:1px solid #ece7db; border-radius:14px; padding:.6rem .65rem; }
+  .ring{
+    --p:68; flex:0 0 auto; width:56px; height:56px; border-radius:50%;
+    background:
+      radial-gradient(closest-side,#fff 71%,transparent 72% 100%),
+      conic-gradient(var(--tw) calc(var(--p)*1%), #e4efe9 0);
+    display:grid; place-items:center; font-weight:800; font-size:.72rem; color:#0b6b48;
+  }
+  .ring-row .rtxt b{ font-size:.78rem; display:block; }
+  .ring-row .rtxt span{ font-size:.65rem; color:#7a857e; }
+
+  .mini-list{ display:flex; flex-direction:column; gap:.3rem; }
+  .mini-list .mi{
+    display:flex; justify-content:space-between; font-size:.68rem;
+    background:#fff; border:1px solid #ece7db; border-radius:9px; padding:.35rem .55rem;
+  }
+  .mini-list .mi .g{ font-weight:800; color:#0b6b48; }
+
+  /* service intro (beside phone) */
+  .svc-intro h3{ margin:0 0 .5rem; font-size:1.2rem; font-weight:800; }
+  .svc-intro .desc{ color:var(--muted); margin:0 0 1rem; font-size:.95rem; }
+  .shows{ display:flex; flex-direction:column; gap:.55rem; }
+  .shows .row{ display:flex; align-items:flex-start; gap:.55rem; font-size:.9rem; }
+  .shows .row .ic{
+    flex:0 0 auto; width:22px; height:22px; border-radius:7px; margin-top:.1rem;
+    background:color-mix(in srgb,var(--tw) 15%,transparent); color:var(--tw);
+    display:grid; place-items:center; font-weight:800; font-size:.8rem;
+  }
+
+  /* requirements */
+  .req-grid{ display:grid; grid-template-columns:1fr; gap:.8rem; }
+  @media(min-width:560px){ .req-grid{ grid-template-columns:1fr 1fr; } }
+  .req{
+    background:var(--panel); border:1px solid var(--line); border-radius:16px;
+    padding:1rem; box-shadow:var(--shadow-sm); position:relative;
+  }
+  .req .tag{
+    display:inline-flex; align-items:center; gap:.4rem; font-size:.7rem; font-weight:700;
+    color:var(--uni); background:color-mix(in srgb,var(--uni) 12%,transparent);
+    padding:.25rem .6rem; border-radius:999px; margin-bottom:.55rem;
+  }
+  .req h4{ margin:.1rem 0 .35rem; font-size:1rem; font-weight:800; }
+  .req p{ margin:0; font-size:.86rem; color:var(--muted); }
+  .req .own{ margin-top:.6rem; font-size:.74rem; color:var(--ink); font-weight:600; }
+  .req .own em{ color:var(--tw); font-style:normal; }
+
+  /* systems chips */
+  .sys{ display:flex; flex-wrap:wrap; gap:.6rem; }
+  .sys .chip{
+    flex:1 1 150px; background:var(--panel); border:1px solid var(--line); border-radius:14px;
+    padding:.75rem .85rem; box-shadow:var(--shadow-sm);
+  }
+  .sys .chip b{ display:block; font-size:.92rem; }
+  .sys .chip span{ font-size:.76rem; color:var(--muted); }
+
+  .note{
+    margin-top:1.4rem; font-size:.76rem; color:var(--muted); text-align:center;
+    border-top:1px dashed var(--line); padding-top:1rem;
+  }
+</style>
+
+<div class="wrap">
+
+  <!-- brand bar -->
+  <div class="brandbar">
+    <div class="brand">
+      <span class="emblem">
+        <!-- University emblem (placeholder) -->
+        <svg width="42" height="42" viewBox="0 0 64 64" role="img" aria-label="شعار جامعة روباطن">
+          <circle cx="32" cy="32" r="30" fill="var(--uni)"/>
+          <circle cx="32" cy="32" r="30" fill="none" stroke="var(--gold)" stroke-width="2.5"/>
+          <path d="M16 38c8-4 24-4 32 0v3c-8-4-24-4-32 0z" fill="var(--gold)"/>
+          <path d="M32 18l3.4 6.9 7.6 1.1-5.5 5.4 1.3 7.6L32 42l-6.8 3.6 1.3-7.6-5.5-5.4 7.6-1.1z" fill="#fff"/>
+        </svg>
+      </span>
+      <span class="name">
+        <b>جامعة روباطن</b>
+        <span>الخطة الرقمية</span>
+      </span>
+    </div>
+
+    <div class="brand-sep"></div>
+
+    <div class="brand">
+      <span class="name" style="text-align:end;">
+        <b>منصّة توكلنا</b>
+        <span>قناة الإطلاق</span>
+      </span>
+      <span class="emblem">
+        <!-- Tawakkalna app icon (placeholder) -->
+        <svg width="42" height="42" viewBox="0 0 64 64" role="img" aria-label="شعار تطبيق توكلنا">
+          <defs>
+            <linearGradient id="tw" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#12a06d"/><stop offset="1" stop-color="#0a734e"/>
+            </linearGradient>
+          </defs>
+          <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#tw)"/>
+          <path d="M32 15l14 6v9c0 10-6 16-14 19-8-3-14-9-14-19v-9z" fill="#fff" opacity=".95"/>
+          <path d="M26 33l4.5 4.5L40 28" fill="none" stroke="#0a734e" stroke-width="3.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <!-- hero -->
+  <header class="hero">
+    <span class="kicker">خطة إطلاق خدمات رقمية</span>
+    <h1>خدمات جامعة روباطن في تطبيق توكلنا</h1>
+    <p>خطة مقترحة لإطلاق ١٠ خدمات رقمية للطلاب والموظفين عبر منصّة توكلنا، اعتمادًا على أنظمة الجامعة القائمة.</p>
+    <div class="meta-row">
+      <span class="pill">عدد الخدمات: <b>١٠</b></span>
+      <span class="pill">هذه الوثيقة: <b>نموذج خدمة واحدة</b></span>
+      <span class="pill">إعداد: <b>الإدارة الرقمية</b></span>
+    </div>
+  </header>
+
+  <!-- service example -->
+  <div class="sec-head">
+    <span class="sec-num">١</span>
+    <h2>خدمة: حالة المعدل التراكمي</h2>
+    <span class="hint">نموذج تفصيلي</span>
+  </div>
+
+  <section class="service">
+    <div class="service-top">
+
+      <!-- phone mockup -->
+      <div class="phone" aria-label="معاينة الخدمة داخل تطبيق توكلنا">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="app-head">
+            <div class="svc-name">حالة المعدل التراكمي</div>
+            <div class="svc-sub">جامعة روباطن · عبر توكلنا</div>
+          </div>
+          <div class="app-body">
+            <div class="stu">
+              <div class="av">ع</div>
+              <div class="info">
+                <b>عبدالله محمد الشهري</b>
+                <span>٤٤١٠٢٢٣٧ · الأمن السيبراني (CYP)</span>
+              </div>
+            </div>
+
+            <div class="gpa-card">
+              <div class="lbl">المعدل التراكمي</div>
+              <div class="val">٤٫٥٢ <small>/ ٥٫٠٠</small></div>
+              <span class="tier">تقدير: ممتاز مرتفع</span>
+            </div>
+
+            <div class="ring-row">
+              <div class="ring" style="--p:68">٦٨٪</div>
+              <div class="rtxt">
+                <b>نسبة إنجاز الخطة الدراسية</b>
+                <span>٩٤ من ١٣٨ ساعة معتمدة</span>
+              </div>
+            </div>
+
+            <div class="mini-list">
+              <div class="mi"><span>أمن الشبكات</span><span class="g">A+</span></div>
+              <div class="mi"><span>التشفير التطبيقي</span><span class="g">A</span></div>
+              <div class="mi"><span>تحليل البرمجيات الخبيثة</span><span class="g">A+</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- service intro -->
+      <div class="svc-intro">
+        <h3>ماذا تعرض للطالب؟</h3>
+        <p class="desc">خدمة تُظهر للطالب حالته الأكاديمية بلمحة واحدة داخل توكلنا دون الحاجة لفتح نظام القبول والتسجيل.</p>
+        <div class="shows">
+          <div class="row"><span class="ic">✓</span><div>الاسم والرقم الجامعي والتخصّص</div></div>
+          <div class="row"><span class="ic">✓</span><div>المعدل التراكمي والتقدير الحالي</div></div>
+          <div class="row"><span class="ic">✓</span><div>نسبة إنجاز الخطة الدراسية (٪) بمقارنة المواد المجتازة بالخطة</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- requirements -->
+  <div class="sec-head">
+    <span class="sec-num">◆</span>
+    <h2>متطلبات الخدمة</h2>
+  </div>
+
+  <div class="req-grid">
+    <div class="req">
+      <span class="tag">مصدر البيانات</span>
+      <h4>View Database من نظام SIS</h4>
+      <p>إنشاء «فيو» قاعدة بيانات من نظام القبول والتسجيل (SIS) يضم بيانات الطالب والمواد والدرجات.</p>
+      <div class="own">الجهة المزوّدة: <em>عمادة القبول والتسجيل</em></div>
+    </div>
+
+    <div class="req">
+      <span class="tag">مرجع الحساب</span>
+      <h4>الخطة الدراسية (PDF)</h4>
+      <p>اعتماد الخطة الدراسية للتخصّص كمرجع لحساب نسبة الإنجاز بمقارنتها بالمواد المجتازة.</p>
+      <div class="own">المصدر: <em>الأقسام الأكاديمية</em></div>
+    </div>
+
+    <div class="req">
+      <span class="tag">التطوير</span>
+      <h4>ربط وتطوير الخدمة</h4>
+      <p>بناء واجهة برمجية (API) تربط الفيو بتوكلنا، مع منطق حساب المعدل ونسبة الإنجاز.</p>
+      <div class="own">المنفّذ: <em>فريق التطوير</em></div>
+    </div>
+
+    <div class="req">
+      <span class="tag">التصميم</span>
+      <h4>تصميم الواجهة (UI/UX)</h4>
+      <p>تصميم واجهة الخدمة داخل توكلنا باللغة العربية واتجاه RTL بما يوافق هوية المنصّة.</p>
+      <div class="own">المنفّذ: <em>فريق تجربة المستخدم</em></div>
+    </div>
+  </div>
+
+  <!-- available systems context -->
+  <div class="sec-head">
+    <span class="sec-num">≡</span>
+    <h2>الأنظمة المتاحة للاستفادة منها</h2>
+  </div>
+  <div class="sys">
+    <div class="chip"><b>نظام SIS</b><span>القبول والتسجيل: الطلاب، المواد، الدرجات</span></div>
+    <div class="chip"><b>نظام جديد</b><span>بيانات الموظفين، الرواتب، المناصب، الجهات</span></div>
+    <div class="chip"><b>نظام حاضر</b><span>حضور وانصراف الموظفين</span></div>
+    <div class="chip"><b>الخطط الدراسية</b><span>ملفات PDF لكل تخصّص</span></div>
+  </div>
+
+  <p class="note">
+    الشعارات مبدئية (SVG) تُستبدل لاحقًا بالشعارات الرسمية لجامعة روباطن وتطبيق توكلنا · البيانات المعروضة نموذجية للتوضيح فقط.
+  </p>
+
+</div>
