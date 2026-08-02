@@ -1,0 +1,193 @@
+:root {
+  --bg: #f4f0e6;
+  --ink: #14231f;
+  --muted: #5a6b64;
+  --card: #ffffff;
+  --line: #e4ddcd;
+  --accent: #b07d2b;
+  --teal: #2a8f74;
+  --shadow: 0 20px 60px rgba(20, 35, 31, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1e1a;
+    --ink: #f1efe6;
+    --muted: #9fb3ab;
+    --card: #16292400;
+    --line: #24413a;
+    --accent: #d4a24e;
+    --teal: #45c3a2;
+    --shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+  }
+}
+
+:root[data-theme="light"] {
+  --bg: #f4f0e6;
+  --ink: #14231f;
+  --muted: #5a6b64;
+  --card: #ffffff;
+  --line: #e4ddcd;
+  --accent: #b07d2b;
+  --teal: #2a8f74;
+  --shadow: 0 20px 60px rgba(20, 35, 31, 0.12);
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1e1a;
+  --ink: #f1efe6;
+  --muted: #9fb3ab;
+  --card: #16292400;
+  --line: #24413a;
+  --accent: #d4a24e;
+  --teal: #45c3a2;
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  min-height: 100vh;
+  padding: 2rem 1.25rem;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Tahoma, "Noto Kufi Arabic", system-ui, sans-serif;
+  overflow: hidden;
+}
+
+/* soft animated background glow */
+.glow {
+  position: fixed;
+  inset: -30%;
+  z-index: 0;
+  background:
+    radial-gradient(40% 40% at 25% 30%, color-mix(in srgb, var(--teal) 35%, transparent), transparent 70%),
+    radial-gradient(35% 35% at 78% 68%, color-mix(in srgb, var(--accent) 32%, transparent), transparent 70%);
+  filter: blur(20px);
+  animation: drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from { transform: translate3d(-3%, -2%, 0) scale(1); }
+  to   { transform: translate3d(4%, 3%, 0) scale(1.12); }
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  width: min(560px, 100%);
+  text-align: center;
+  padding: 3rem 2.25rem;
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.6rem, 8vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.wave {
+  display: inline-block;
+  transform-origin: 70% 70%;
+  animation: wave 2.4s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10%, 30% { transform: rotate(16deg); }
+  20% { transform: rotate(-8deg); }
+}
+
+.subtitle {
+  margin: 1rem auto 0;
+  max-width: 38ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.tag {
+  display: inline-block;
+  margin: 0 0.15rem;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--teal) 16%, transparent);
+  color: var(--teal);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.clock {
+  margin: 2rem 0 1.75rem;
+  font-size: 2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.btn {
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.85rem 1.75rem;
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--teal);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--teal) 40%, transparent);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.btn:active { transform: translateY(0); }
+.btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.msg {
+  min-height: 1.5rem;
+  margin: 1.1rem 0 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.foot {
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow, .wave, .card { animation: none; }
+  .btn { transition: none; }
+}
