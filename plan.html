@@ -75,6 +75,24 @@
   .svc li::before{ content:""; position:absolute; right:0; top:.62em; width:6px; height:6px; border-radius:2px; background:var(--gold); }
   .svc li .src{ color:var(--muted); font-size:.77rem; }
 
+  /* مؤشر المراحل */
+  .stages{ display:flex; margin-top:1rem; padding-top:.9rem; border-top:1px dashed var(--line); }
+  .stg{ position:relative; flex:1; display:flex; flex-direction:column; align-items:center; gap:.35rem; }
+  .stg::before{
+    content:""; position:absolute; top:12px; right:50%; width:100%; height:2px;
+    background:var(--line); transition:background .3s;
+  }
+  .stg:first-child::before{ display:none; }
+  .stg .dot{
+    position:relative; z-index:1; width:25px; height:25px; border-radius:50%;
+    display:grid; place-items:center; background:#fff; border:2px solid var(--line);
+    color:#c8ced7; font-size:.68rem; font-weight:800; transition:all .3s;
+  }
+  .stg .lbl{ font-size:.62rem; font-weight:700; color:var(--muted); }
+  .stg.done::before{ background:var(--tw); }
+  .stg.done .dot{ background:var(--tw); border-color:var(--tw); color:#fff; box-shadow:0 3px 10px rgba(15,157,99,.35); }
+  .stg.done .lbl{ color:var(--navy); }
+
   /* الانسدال (جوال فقط) */
   .drop{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
   .drop > div{ overflow:hidden; }
@@ -346,11 +364,18 @@ function screenHTML(s){
   </div>`;
 }
 
+/* مراحل كل خدمة — prog: عدد المراحل المكتملة (0 = كلها معلّقة) */
+const STAGES = ["اعتماد", "المتطلبات", "التنفيذ", "الإطلاق"];
+const PROGRESS = { };   /* مثال للتفعيل لاحقًا: {0:1} يعني الخدمة ١ اجتازت الاعتماد */
+
 /* بناء القائمة */
 const list = document.getElementById("list");
 SERVICES.forEach((s, i) => {
   const reqs = s.reqs.map(([r, src]) =>
     `<li>${r}${src ? ` <span class="src">— ${src}</span>` : ""}</li>`).join("");
+  const prog = PROGRESS[i] || 0;
+  const stages = STAGES.map((t, k) =>
+    `<div class="stg ${k < prog ? "done" : ""}"><span class="dot">✓</span><span class="lbl">${t}</span></div>`).join("");
   const el = document.createElement("div");
   el.className = "svc"; el.id = "svc-" + i;
   el.innerHTML = `
@@ -363,6 +388,7 @@ SERVICES.forEach((s, i) => {
       <div class="aud-line">الفئة المستهدفة: <b>${s.aud}</b></div>
       <div class="req-ttl">المتطلبات</div>
       <ul>${reqs}</ul>
+      <div class="stages" aria-label="مراحل الخدمة">${stages}</div>
     </button>
     <div class="drop" id="drop-${i}"><div><div class="phone-slot"></div></div></div>`;
   el.querySelector(".card-btn").addEventListener("click", () => select(i));
