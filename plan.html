@@ -1,18 +1,10 @@
 <title>خطة إطلاق خدمات جامعة حفر الباطن في توكلنا</title>
 <style>
-  /* هوية فاتحة فقط — بألوان واجهة توكلنا الحقيقية */
+  /* هوية بيضاء مينمالستك — بألوان واجهة توكلنا */
   :root{
-    --bg:#ffffff;
-    --ink:#1e3a5f;          /* كحلي توكلنا */
-    --navy:#17335a;         /* بطاقة الخدمة الكحلية */
-    --navy-2:#1f4270;
-    --gold:#d9a842;         /* الذهبي داخل البطاقات */
-    --muted:#8b94a3;
-    --soft:#f6f8fa;
-    --line:#e8ecf1;
-    --tw:#0f9d63;           /* أخضر توكلنا للمسات الخفيفة */
+    --bg:#ffffff; --ink:#1e3a5f; --navy:#17335a; --gold:#d9a842;
+    --muted:#8b94a3; --soft:#f6f8fa; --line:#e8ecf1; --tw:#0f9d63;
   }
-
   *{ box-sizing:border-box; }
   html,body{ margin:0; }
   body{
@@ -20,9 +12,9 @@
     font-family:"Segoe UI",Tahoma,"Noto Kufi Arabic",system-ui,sans-serif;
     line-height:1.7; -webkit-font-smoothing:antialiased;
   }
-  .wrap{ max-width:720px; margin:0 auto; padding:1.5rem 1.15rem 3rem; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:1.5rem 1.15rem 3rem; }
 
-  /* ---------- الترويسة ---------- */
+  /* الترويسة */
   .top{
     display:flex; align-items:center; justify-content:space-between; gap:1rem;
     padding-bottom:1.1rem; border-bottom:1px solid var(--line);
@@ -31,127 +23,116 @@
   .top .uni{ width:104px; }
   .top .tw-logo{ width:96px; }
 
-  .hero{ text-align:center; padding:1.8rem 0 .4rem; }
+  .hero{ text-align:center; padding:1.8rem 0 1.4rem; max-width:640px; margin:0 auto; }
   .hero .kicker{ font-size:.72rem; font-weight:700; letter-spacing:.1em; color:var(--tw); }
   h1{ margin:.35rem 0 .4rem; font-size:clamp(1.35rem,4.8vw,1.7rem); font-weight:800; text-wrap:balance; }
-  .hero p{ margin:0 auto; max-width:44ch; color:var(--muted); font-size:.92rem; }
+  .hero p{ margin:0 auto; max-width:46ch; color:var(--muted); font-size:.92rem; }
 
-  /* ---------- فريم الجوال (مطابق لواجهة توكلنا) ---------- */
-  .demo{ display:flex; justify-content:center; padding:1.8rem 0 .4rem; }
+  /* تخطيط: قائمة + معاينة جانبية لسطح المكتب */
+  .layout{ display:grid; grid-template-columns:1fr; gap:1.6rem; align-items:start; }
+  @media(min-width:920px){ .layout{ grid-template-columns:1fr 340px; } }
+
+  .list-head{
+    margin:0 0 1rem; font-size:1.02rem; font-weight:800; color:var(--ink);
+    display:flex; align-items:center; gap:.55rem;
+  }
+  .list-head::after{ content:""; flex:1; height:1px; background:var(--line); }
+  .list-hint{ font-size:.74rem; color:var(--muted); font-weight:600; }
+
+  /* بطاقة الخدمة */
+  .svc{
+    border:1px solid var(--line); border-radius:16px; margin-bottom:.8rem; background:#fff;
+    overflow:hidden; transition:border-color .2s, box-shadow .2s;
+  }
+  .svc.active{ border-color:var(--navy); box-shadow:0 4px 18px rgba(23,51,90,.08); }
+  .svc .card-btn{
+    all:unset; display:block; width:100%; cursor:pointer; padding:1rem 1.05rem;
+  }
+  .svc .card-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:-3px; border-radius:16px; }
+  .svc .head{ display:flex; align-items:center; gap:.6rem; }
+  .svc .num{
+    flex:0 0 auto; width:24px; height:24px; border-radius:8px; display:grid; place-items:center;
+    background:var(--navy); color:var(--gold); font-size:.75rem; font-weight:800;
+  }
+  .svc h3{ margin:0; font-size:.97rem; font-weight:800; }
+  .svc .sys{
+    margin-inline-start:auto; font-size:.64rem; font-weight:700; padding:.15rem .55rem;
+    border-radius:99px; background:var(--soft); color:var(--muted); white-space:nowrap;
+  }
+  .svc .chev{ flex:0 0 auto; color:var(--muted); font-size:.7rem; transition:transform .25s; }
+  .svc.active .chev{ transform:rotate(180deg); }
+  .svc .desc{ margin:.45rem 0 .55rem; font-size:.84rem; color:var(--muted); }
+  .aud-line{ display:flex; align-items:center; gap:.4rem; font-size:.78rem; margin-bottom:.55rem; color:var(--muted); }
+  .aud-line b{ color:var(--navy); font-weight:700; }
+  .aud-line::before{ content:"◉"; font-size:.6rem; color:var(--tw); }
+  .req-ttl{ font-size:.7rem; font-weight:800; color:var(--tw); margin-bottom:.3rem; }
+  .svc ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.32rem; }
+  .svc li{ position:relative; padding-inline-start:1rem; font-size:.82rem; color:var(--ink); }
+  .svc li::before{ content:""; position:absolute; right:0; top:.62em; width:6px; height:6px; border-radius:2px; background:var(--gold); }
+  .svc li .src{ color:var(--muted); font-size:.77rem; }
+
+  /* الانسدال (جوال فقط) */
+  .drop{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
+  .drop > div{ overflow:hidden; }
+  .svc.active .drop{ grid-template-rows:1fr; }
+  .drop .phone-slot{ display:flex; justify-content:center; padding:0 1rem 1.2rem; }
+  @media(min-width:920px){ .drop{ display:none; } }
+
+  /* المعاينة الجانبية (سطح المكتب فقط) */
+  .preview{ display:none; }
+  @media(min-width:920px){
+    .preview{ display:block; position:sticky; top:1.2rem; }
+    .preview .cap{ text-align:center; font-size:.74rem; color:var(--muted); margin-top:.7rem; }
+  }
+
+  /* فريم الجوال — مطابق لواجهة توكلنا الحقيقية */
   .phone{
-    width:290px; max-width:100%; border-radius:36px; padding:11px;
-    background:#0e1420;
+    width:290px; max-width:100%; border-radius:36px; padding:11px; background:#0e1420;
     box-shadow:0 18px 44px rgba(23,51,90,.22), inset 0 0 0 2px rgba(255,255,255,.06);
+    margin:0 auto;
   }
   .screen{
     position:relative; border-radius:27px; overflow:hidden; background:#fff;
     aspect-ratio:9/18; display:flex; flex-direction:column;
   }
-  /* شريط الحالة */
-  .sbar{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:.55rem .9rem .2rem; font-size:.58rem; color:#333; font-weight:600;
-  }
-  /* ترويسة الخدمة: X + الاسم + كبسولة القوائم */
-  .apphead{
-    display:flex; align-items:center; gap:.45rem; padding:.55rem .7rem .4rem;
-  }
-  .x-btn{
-    flex:0 0 auto; width:30px; height:30px; border:1.6px solid #23324a; border-radius:50%;
-    display:grid; place-items:center; color:#23324a; font-size:.8rem; font-weight:700;
-  }
-  .apphead .ttl{
-    flex:1; min-width:0; font-size:.78rem; font-weight:700; color:#1e3a5f;
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
-  .caps{
-    flex:0 0 auto; display:flex; align-items:center; gap:.5rem;
-    border:1.6px solid #23324a; border-radius:999px; padding:.28rem .6rem; color:#23324a;
-  }
+  .sbar{ display:flex; justify-content:space-between; align-items:center; padding:.55rem .9rem .2rem; font-size:.58rem; color:#333; font-weight:600; }
+  .apphead{ display:flex; align-items:center; gap:.45rem; padding:.55rem .7rem .4rem; }
+  .x-btn{ flex:0 0 auto; width:30px; height:30px; border:1.6px solid #23324a; border-radius:50%; display:grid; place-items:center; color:#23324a; font-size:.8rem; font-weight:700; }
+  .apphead .ttl{ flex:1; min-width:0; font-size:.76rem; font-weight:700; color:#1e3a5f; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .caps{ flex:0 0 auto; display:flex; align-items:center; gap:.5rem; border:1.6px solid #23324a; border-radius:999px; padding:.28rem .6rem; color:#23324a; }
   .caps .i{ font-size:.72rem; line-height:1; }
   .caps .sep{ width:1px; height:12px; background:#23324a55; }
-
-  /* اسم الخدمة + شعار الجامعة */
-  .svc-row{
-    display:flex; align-items:flex-start; justify-content:space-between;
-    padding:.9rem 1rem .3rem;
-  }
+  .svc-row{ display:flex; align-items:flex-start; justify-content:space-between; padding:.9rem 1rem .3rem; }
   .svc-row .t .g{ font-size:.62rem; color:#9aa3b0; }
-  .svc-row .t .n{ font-size:.86rem; font-weight:800; color:#1e3a5f; line-height:1.4; }
+  .svc-row .t .n{ font-size:.85rem; font-weight:800; color:#1e3a5f; line-height:1.4; }
   .svc-row img{ width:44px; height:auto; display:block; }
-
-  /* البطاقة الكحلية */
-  .navy-card{
-    margin:.8rem .8rem; background:var(--navy); border-radius:20px;
-    padding:1rem .95rem 1.05rem; color:#fff; text-align:right;
-  }
-  .navy-card .who{ font-size:.72rem; opacity:.85; }
-  .navy-card .who b{ font-size:.8rem; color:#fff; display:block; opacity:1; }
-  .gpa-line{
-    display:flex; align-items:center; justify-content:space-between; margin-top:.75rem;
-  }
-  .gpa-line .lbl{ font-size:.68rem; color:var(--gold); font-weight:700; }
-  .gpa-line .v{ font-size:1.5rem; font-weight:800; color:var(--gold); }
-  .gpa-line .v small{ font-size:.7rem; font-weight:700; color:#e8c887; }
-  .bar{
-    margin-top:.8rem; height:7px; border-radius:99px; background:#ffffff22; overflow:hidden;
-  }
-  .bar i{ display:block; height:100%; width:68%; background:var(--gold); border-radius:99px; }
+  .navy-card{ margin:.8rem .8rem; background:var(--navy); border-radius:20px; padding:1rem .95rem 1.05rem; color:#fff; text-align:right; }
+  .navy-card .who{ font-size:.7rem; opacity:.85; margin-bottom:.2rem; }
+  .navy-card .who b{ font-size:.79rem; color:#fff; display:block; opacity:1; }
+  .kv{ display:flex; align-items:center; justify-content:space-between; padding:.42rem 0; border-bottom:1px solid #ffffff14; }
+  .kv:last-child{ border-bottom:none; }
+  .kv .k{ font-size:.68rem; color:#c9d3e2; }
+  .kv .v{ font-size:.76rem; font-weight:800; color:var(--gold); }
+  .big-line{ display:flex; align-items:center; justify-content:space-between; margin-top:.55rem; }
+  .big-line .lbl{ font-size:.68rem; color:var(--gold); font-weight:700; }
+  .big-line .v{ font-size:1.45rem; font-weight:800; color:var(--gold); }
+  .big-line .v small{ font-size:.68rem; font-weight:700; color:#e8c887; }
+  .bar{ margin-top:.7rem; height:7px; border-radius:99px; background:#ffffff22; overflow:hidden; }
+  .bar i{ display:block; height:100%; background:var(--gold); border-radius:99px; }
   .bar-lbl{ display:flex; justify-content:space-between; margin-top:.4rem; font-size:.62rem; color:#c9d3e2; }
   .bar-lbl b{ color:var(--gold); }
 
-  .demo-cap{ text-align:center; font-size:.74rem; color:var(--muted); margin:.6rem 0 0; }
-
-  /* ---------- الخدمات ---------- */
-  .sec{ margin-top:2.3rem; }
-  .sec > h2{
-    margin:0 0 1.1rem; font-size:1.05rem; font-weight:800; color:var(--ink);
-    display:flex; align-items:center; gap:.55rem;
-  }
-  .sec > h2::after{ content:""; flex:1; height:1px; background:var(--line); }
-
-  .svc{ border:1px solid var(--line); border-radius:16px; padding:1rem 1.05rem; margin-bottom:.85rem; background:#fff; }
-  .svc .head{ display:flex; align-items:baseline; gap:.6rem; }
-  .svc .num{
-    flex:0 0 auto; width:24px; height:24px; border-radius:8px; display:grid; place-items:center;
-    background:var(--navy); color:var(--gold); font-size:.78rem; font-weight:800; align-self:center;
-  }
-  .svc h3{ margin:0; font-size:.98rem; font-weight:800; }
-  .svc .aud{
-    margin-inline-start:auto; font-size:.66rem; font-weight:700; padding:.15rem .55rem;
-    border-radius:99px; background:var(--soft); color:var(--muted); white-space:nowrap;
-  }
-  .svc .desc{ margin:.45rem 0 .65rem; font-size:.85rem; color:var(--muted); }
-  .aud-line{
-    display:flex; align-items:center; gap:.4rem; font-size:.78rem; margin-bottom:.6rem;
-    color:var(--muted);
-  }
-  .aud-line b{ color:var(--navy); font-weight:700; }
-  .aud-line::before{ content:"◉"; font-size:.6rem; color:var(--tw); }
-  .req-ttl{ font-size:.72rem; font-weight:800; color:var(--tw); margin-bottom:.35rem; }
-  .svc ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.35rem; }
-  .svc li{
-    position:relative; padding-inline-start:1rem; font-size:.83rem; color:var(--ink);
-  }
-  .svc li::before{
-    content:""; position:absolute; right:0; top:.62em; width:6px; height:6px;
-    border-radius:2px; background:var(--gold);
-  }
-  .svc li .src{ color:var(--muted); font-size:.78rem; }
-
-  /* ---------- التذييل ---------- */
-  .foot{
-    margin-top:2.4rem; padding-top:1.2rem; border-top:1px solid var(--line);
-    text-align:center;
-  }
+  /* التذييل */
+  .foot{ margin-top:2.6rem; padding-top:1.2rem; border-top:1px solid var(--line); text-align:center; }
   .foot .lbl{ font-size:.74rem; color:var(--muted); margin-bottom:.5rem; }
   .foot img{ width:170px; max-width:70%; height:auto; }
   .foot .fine{ margin-top:.8rem; font-size:.68rem; color:var(--muted); }
+
+  @media (prefers-reduced-motion: reduce){ .drop, .svc .chev{ transition:none; } }
 </style>
 
 <div class="wrap">
 
-  <!-- الترويسة -->
   <div class="top">
     <img class="uni" src="assets/university.png" alt="جامعة حفر الباطن" />
     <img class="tw-logo" src="assets/tawakkalna.png" alt="توكلنا" />
@@ -160,123 +141,250 @@
   <header class="hero">
     <span class="kicker">خطة مقترحة</span>
     <h1>إطلاق خدمات جامعة حفر الباطن في تطبيق توكلنا</h1>
-    <p>٦ خدمات رقمية للطلاب والموظفين تُبنى على أنظمة الجامعة القائمة، مع المتطلبات الفعلية لكل خدمة.</p>
+    <p>١٠ خدمات استعلامية (عرض معلومات فقط) تُبنى على أنظمة الجامعة القائمة — اختر أي خدمة لمعاينة شكلها داخل توكلنا.</p>
   </header>
 
-  <!-- معاينة الخدمة داخل توكلنا -->
-  <div class="demo">
-    <div class="phone" aria-label="معاينة الخدمة داخل توكلنا">
-      <div class="screen">
-        <div class="sbar"><span>stc &nbsp;٥:٣٨</span><span>▂▄▆ ●</span></div>
-        <div class="apphead">
-          <span class="x-btn">✕</span>
-          <span class="ttl">حالة المعدل التراكمي جامعة حفر الباطن</span>
-          <span class="caps"><span class="i">☰</span><span class="sep"></span><span class="i">⊞</span></span>
-        </div>
-        <div class="svc-row">
-          <div class="t">
-            <div class="g">الخدمات</div>
-            <div class="n">حالة المعدل التراكمي</div>
-          </div>
-          <img src="assets/university.png" alt="" />
-        </div>
-        <div class="navy-card">
-          <div class="who">
-            <b>عبدالله محمد الشهري</b>
-            ٤٤١٠٢٢٣٧ · الأمن السيبراني CYP
-          </div>
-          <div class="gpa-line">
-            <span class="lbl">المعدل التراكمي</span>
-            <span class="v">٤٫٥٢ <small>من ٥</small></span>
-          </div>
-          <div class="bar"><i></i></div>
-          <div class="bar-lbl"><span>إنجاز الخطة الدراسية</span><b>٦٨٪</b></div>
-        </div>
-      </div>
+  <div class="layout">
+    <div>
+      <h2 class="list-head">الخدمات المقترحة <span class="list-hint">انقر الخدمة للمعاينة</span></h2>
+      <div id="list"></div>
     </div>
+
+    <aside class="preview" aria-label="معاينة الخدمة داخل توكلنا">
+      <div id="preview-slot"></div>
+      <div class="cap" id="preview-cap"></div>
+    </aside>
   </div>
-  <p class="demo-cap">نموذج شكل الخدمة داخل توكلنا — خدمة رقم ١</p>
 
-  <!-- الخدمات الست -->
-  <section class="sec">
-    <h2>الخدمات المقترحة ومتطلباتها</h2>
-
-    <div class="svc">
-      <div class="head"><span class="num">١</span><h3>حالة المعدل التراكمي</h3><span class="aud">سجلات الطلاب</span></div>
-      <p class="desc">اسم الطالب، معدله التراكمي، ونسبة إنجازه من الخطة الدراسية.</p>
-      <div class="aud-line">الفئة المستهدفة: <b>طلاب وطالبات الجامعة</b></div>
-      <div class="req-ttl">المتطلبات</div>
-      <ul>
-        <li>View Database من نظام سجلات الطلاب <span class="src">— عمادة القبول والتسجيل</span></li>
-        <li>تحويل الخطط الدراسية من PDF إلى بيانات قابلة للمقارنة <span class="src">— الأقسام الأكاديمية</span></li>
-        <li>تطوير الخدمة وتصميم الواجهة</li>
-      </ul>
-    </div>
-
-    <div class="svc">
-      <div class="head"><span class="num">٢</span><h3>الجدول الدراسي</h3><span class="aud">سجلات الطلاب</span></div>
-      <p class="desc">مواد الفصل الحالي مع أوقات المحاضرات والقاعات.</p>
-      <div class="aud-line">الفئة المستهدفة: <b>طلاب وطالبات الجامعة</b></div>
-      <div class="req-ttl">المتطلبات</div>
-      <ul>
-        <li>View Database لجداول الشُعب والأوقات من نظام سجلات الطلاب <span class="src">— عمادة القبول والتسجيل</span></li>
-        <li>تطوير الخدمة وتصميم الواجهة</li>
-      </ul>
-    </div>
-
-    <div class="svc">
-      <div class="head"><span class="num">٣</span><h3>سجل الحضور والانصراف</h3><span class="aud">حاضر</span></div>
-      <p class="desc">بصمات الموظف اليومية وملخص الدوام الشهري.</p>
-      <div class="aud-line">الفئة المستهدفة: <b>جميع منسوبي الجامعة</b></div>
-      <div class="req-ttl">المتطلبات</div>
-      <ul>
-        <li>View Database من نظام حاضر <span class="src">— الموارد البشرية</span></li>
-        <li>تطوير الخدمة وتصميم الواجهة</li>
-      </ul>
-    </div>
-
-    <div class="svc">
-      <div class="head"><span class="num">٤</span><h3>تعريف بالراتب</h3><span class="aud">جدير</span></div>
-      <p class="desc">شهادة تعريف بالراتب والمنصب وجهة العمل، جاهزة للمشاركة.</p>
-      <div class="aud-line">الفئة المستهدفة: <b>جميع منسوبي الجامعة</b></div>
-      <div class="req-ttl">المتطلبات</div>
-      <ul>
-        <li>View Database للرواتب والبيانات الوظيفية من نظام جدير <span class="src">— الإدارة المالية والإدارية</span></li>
-        <li>اعتماد نموذج التعريف مع رمز تحقق (QR) <span class="src">— الموارد البشرية</span></li>
-        <li>تطوير الخدمة وتصميم الواجهة</li>
-      </ul>
-    </div>
-
-    <div class="svc">
-      <div class="head"><span class="num">٥</span><h3>متابعة المعاملات الإدارية</h3><span class="aud">تمام</span></div>
-      <p class="desc">حالة المعاملات الواردة والصادرة للموظف وإشعار عند تحديثها.</p>
-      <div class="aud-line">الفئة المستهدفة: <b>الموظفون الإداريون وأصحاب الصلاحيات</b></div>
-      <div class="req-ttl">المتطلبات</div>
-      <ul>
-        <li>View Database لحالة المعاملات من نظام تمام <span class="src">— الاتصالات الإدارية</span></li>
-        <li>تحديد صلاحيات العرض (كلٌّ يرى معاملاته فقط) <span class="src">— أمن المعلومات</span></li>
-        <li>تطوير الخدمة وتصميم الواجهة</li>
-      </ul>
-    </div>
-
-    <div class="svc">
-      <div class="head"><span class="num">٦</span><h3>جلسات اللجان والمجالس</h3><span class="aud">ديوان</span></div>
-      <p class="desc">مواعيد الجلسات القادمة وجداول أعمالها لأعضاء اللجان.</p>
-      <div class="aud-line">الفئة المستهدفة: <b>أعضاء اللجان والمجالس</b></div>
-      <div class="req-ttl">المتطلبات</div>
-      <ul>
-        <li>View Database للجلسات والعضويات من نظام ديوان <span class="src">— أمانة المجالس واللجان</span></li>
-        <li>ربط إشعارات التذكير بموعد الجلسة</li>
-        <li>تطوير الخدمة وتصميم الواجهة</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- التذييل -->
   <div class="foot">
     <div class="lbl">منصّة توكلنا مقدَّمة من</div>
     <img src="assets/sdaia.png" alt="سدايا — الهيئة السعودية للبيانات والذكاء الاصطناعي" />
-    <div class="fine">البيانات المعروضة في النموذج توضيحية فقط · جميع الشعارات ملك لأصحابها</div>
+    <div class="fine">البيانات المعروضة في النماذج توضيحية فقط · جميع الشعارات ملك لأصحابها</div>
   </div>
 
 </div>
+
+<script>
+const UNI_LOGO = "assets/university.png";
+
+/* بيانات الخدمات العشر */
+const SERVICES = [
+  {
+    num:"١", name:"حالة المعدل التراكمي", sys:"سجلات الطلاب", aud:"طلاب وطالبات الجامعة",
+    desc:"اسم الطالب، معدله التراكمي، ونسبة إنجازه من الخطة الدراسية.",
+    reqs:[
+      ["View Database من نظام سجلات الطلاب","عمادة القبول والتسجيل"],
+      ["تحويل الخطط الدراسية من PDF إلى بيانات قابلة للمقارنة","الأقسام الأكاديمية"],
+      ["تطوير الخدمة وتصميم الواجهة",""]
+    ],
+    who:{ n:"عبدالله محمد الشهري", d:"٤٤١٠٢٢٣٧ · الأمن السيبراني CYP" },
+    big:{ lbl:"المعدل التراكمي", v:"٤٫٥٢", u:"من ٥" },
+    bar:{ lbl:"إنجاز الخطة الدراسية", p:68, txt:"٦٨٪" }
+  },
+  {
+    num:"٢", name:"الجدول الدراسي", sys:"سجلات الطلاب", aud:"طلاب وطالبات الجامعة",
+    desc:"مواد الفصل الحالي مع أوقات المحاضرات والقاعات.",
+    reqs:[
+      ["View Database لجداول الشُعب والأوقات من نظام سجلات الطلاب","عمادة القبول والتسجيل"],
+      ["تطوير الخدمة وتصميم الواجهة",""]
+    ],
+    who:{ n:"عبدالله محمد الشهري", d:"الفصل الدراسي الأول ١٤٤٧" },
+    kv:[
+      ["أمن الشبكات","٨:٠٠ ص · ق١٠٢"],
+      ["التشفير التطبيقي","١٠:٠٠ ص · ق٢١٥"],
+      ["تحليل البرمجيات الخبيثة","١:٠٠ م · معمل ٣"],
+      ["إدارة المخاطر السيبرانية","٣:٠٠ م · ق١٠٨"]
+    ]
+  },
+  {
+    num:"٣", name:"سجل الحضور والانصراف", sys:"حاضر", aud:"جميع منسوبي الجامعة",
+    desc:"بصمات الموظف اليومية وملخص الدوام الشهري.",
+    reqs:[
+      ["View Database من نظام حاضر","الموارد البشرية"],
+      ["تطوير الخدمة وتصميم الواجهة",""]
+    ],
+    who:{ n:"م. سالم عبدالله العنزي", d:"الرقم الوظيفي ٥٥٨٩" },
+    kv:[
+      ["بصمة الدخول اليوم","٧:٢٦ ص"],
+      ["بصمة الانصراف أمس","٣:٠٤ م"],
+      ["أيام الحضور هذا الشهر","٢٠ يوم"],
+      ["التأخير المسجّل","٩ دقائق"]
+    ]
+  },
+  {
+    num:"٤", name:"درجات المواد", sys:"سجلات الطلاب", aud:"طلاب وطالبات الجامعة",
+    desc:"درجات الأعمال الفصلية والنهائية لكل مادة فور رصدها.",
+    reqs:[
+      ["View Database للدرجات من نظام سجلات الطلاب","عمادة القبول والتسجيل"],
+      ["تطوير الخدمة وتصميم الواجهة",""]
+    ],
+    who:{ n:"عبدالله محمد الشهري", d:"الفصل الدراسي الأول ١٤٤٧" },
+    kv:[
+      ["أمن الشبكات","A+"],
+      ["التشفير التطبيقي","A"],
+      ["تحليل البرمجيات الخبيثة","A+"],
+      ["إدارة المخاطر السيبرانية","B+"]
+    ]
+  },
+  {
+    num:"٥", name:"جدول الاختبارات النهائية", sys:"سجلات الطلاب", aud:"طلاب وطالبات الجامعة",
+    desc:"موعد وقاعة كل اختبار نهائي لمواد الطالب المسجّلة.",
+    reqs:[
+      ["View Database لجداول الاختبارات من نظام سجلات الطلاب","عمادة القبول والتسجيل"],
+      ["تطوير الخدمة وتصميم الواجهة",""]
+    ],
+    who:{ n:"عبدالله محمد الشهري", d:"اختبارات الفصل الأول ١٤٤٧" },
+    kv:[
+      ["أمن الشبكات","الأحد ١٢/٤ · ٨ ص · ق١"],
+      ["التشفير التطبيقي","الثلاثاء ١٤/٤ · ٨ ص · ق٣"],
+      ["تحليل البرمجيات","الخميس ١٦/٤ · ١١ ص · ق٢"]
+    ]
+  },
+  {
+    num:"٦", name:"الحالة الأكاديمية", sys:"سجلات الطلاب", aud:"طلاب وطالبات الجامعة",
+    desc:"وضع الطالب الأكاديمي: انتظامه، ساعاته المسجّلة، وأي إنذارات.",
+    reqs:[
+      ["View Database لحالة القيد من نظام سجلات الطلاب","عمادة القبول والتسجيل"],
+      ["تطوير الخدمة وتصميم الواجهة",""]
+    ],
+    who:{ n:"عبدالله محمد الشهري", d:"٤٤١٠٢٢٣٧ · الأمن السيبراني CYP" },
+    kv:[
+      ["حالة القيد","منتظم"],
+      ["الساعات المسجّلة","١٦ ساعة"],
+      ["المستوى","السادس"],
+      ["الإنذارات الأكاديمية","لا يوجد"]
+    ]
+  },
+  {
+    num:"٧", name:"المواد المتبقية من الخطة", sys:"سجلات الطلاب", aud:"طلاب وطالبات الجامعة",
+    desc:"قائمة المواد المتبقية على الطالب حتى التخرج وفق خطته الدراسية.",
+    reqs:[
+      ["View Database للمواد المجتازة من نظام سجلات الطلاب","عمادة القبول والتسجيل"],
+      ["تحويل الخطط الدراسية من PDF إلى بيانات قابلة للمقارنة","الأقسام الأكاديمية"],
+      ["تطوير الخدمة وتصميم الواجهة",""]
+    ],
+    who:{ n:"عبدالله محمد الشهري", d:"خطة الأمن السيبراني CYP" },
+    big:{ lbl:"المواد المتبقية", v:"١١", u:"مادة · ٤٤ ساعة" },
+    kv:[
+      ["اختبار الاختراق","المستوى ٧"],
+      ["الأدلة الجنائية الرقمية","المستوى ٧"],
+      ["مشروع التخرج ١","المستوى ٨"]
+    ]
+  },
+  {
+    num:"٨", name:"مكافآت الطلاب", sys:"جدير", aud:"طلاب وطالبات الجامعة",
+    desc:"مبلغ المكافأة الشهرية وحالة إيداعها.",
+    reqs:[
+      ["View Database للمكافآت من نظام جدير","الإدارة المالية"],
+      ["تطوير الخدمة وتصميم الواجهة",""]
+    ],
+    who:{ n:"عبدالله محمد الشهري", d:"٤٤١٠٢٢٣٧" },
+    big:{ lbl:"مكافأة شهر شعبان", v:"١٬٠٠٠", u:"ريال" },
+    kv:[
+      ["حالة الإيداع","تم الإيداع ✓"],
+      ["تاريخ الإيداع","٢٧ / ٧ / ١٤٤٧"]
+    ]
+  },
+  {
+    num:"٩", name:"بياناتي الوظيفية", sys:"جدير", aud:"جميع منسوبي الجامعة",
+    desc:"المسمى الوظيفي والمرتبة وجهة العمل للموظف.",
+    reqs:[
+      ["View Database لبيانات الموظفين من نظام جدير","الموارد البشرية"],
+      ["تطوير الخدمة وتصميم الواجهة",""]
+    ],
+    who:{ n:"م. سالم عبدالله العنزي", d:"الرقم الوظيفي ٥٥٨٩" },
+    kv:[
+      ["المسمى الوظيفي","مهندس نظم"],
+      ["المرتبة","التاسعة"],
+      ["جهة العمل","عمادة تقنية المعلومات"],
+      ["تاريخ المباشرة","١٤ / ٣ / ١٤٤١"]
+    ]
+  },
+  {
+    num:"١٠", name:"رصيد الإجازات", sys:"جدير", aud:"جميع منسوبي الجامعة",
+    desc:"أرصدة إجازات الموظف الاعتيادية والاضطرارية المتبقية.",
+    reqs:[
+      ["View Database لأرصدة الإجازات من نظام جدير","الموارد البشرية"],
+      ["تطوير الخدمة وتصميم الواجهة",""]
+    ],
+    who:{ n:"م. سالم عبدالله العنزي", d:"الرقم الوظيفي ٥٥٨٩" },
+    big:{ lbl:"الرصيد الاعتيادي", v:"٢٤", u:"يوم" },
+    kv:[
+      ["الرصيد الاضطراري","٣ أيام"],
+      ["آخر إجازة","١٥ – ١٩ / ٦ / ١٤٤٧"]
+    ]
+  }
+];
+
+/* توليد شاشة الخدمة داخل فريم توكلنا */
+function screenHTML(s){
+  let card = `<div class="who"><b>${s.who.n}</b>${s.who.d}</div>`;
+  if (s.big) card += `<div class="big-line"><span class="lbl">${s.big.lbl}</span><span class="v">${s.big.v} <small>${s.big.u}</small></span></div>`;
+  if (s.bar) card += `<div class="bar"><i style="width:${s.bar.p}%"></i></div><div class="bar-lbl"><span>${s.bar.lbl}</span><b>${s.bar.txt}</b></div>`;
+  if (s.kv)  card += s.kv.map(([k,v]) => `<div class="kv"><span class="k">${k}</span><span class="v">${v}</span></div>`).join("");
+  return `
+  <div class="phone">
+    <div class="screen">
+      <div class="sbar"><span>stc &nbsp;٥:٣٨</span><span>▂▄▆ ●</span></div>
+      <div class="apphead">
+        <span class="x-btn">✕</span>
+        <span class="ttl">${s.name} جامعة حفر الباطن</span>
+        <span class="caps"><span class="i">☰</span><span class="sep"></span><span class="i">⊞</span></span>
+      </div>
+      <div class="svc-row">
+        <div class="t"><div class="g">الخدمات</div><div class="n">${s.name}</div></div>
+        <img src="${UNI_LOGO}" alt="" />
+      </div>
+      <div class="navy-card">${card}</div>
+    </div>
+  </div>`;
+}
+
+/* بناء القائمة */
+const list = document.getElementById("list");
+SERVICES.forEach((s, i) => {
+  const reqs = s.reqs.map(([r, src]) =>
+    `<li>${r}${src ? ` <span class="src">— ${src}</span>` : ""}</li>`).join("");
+  const el = document.createElement("div");
+  el.className = "svc"; el.id = "svc-" + i;
+  el.innerHTML = `
+    <button class="card-btn" aria-expanded="false" aria-controls="drop-${i}">
+      <div class="head">
+        <span class="num">${s.num}</span><h3>${s.name}</h3>
+        <span class="sys">${s.sys}</span><span class="chev">▼</span>
+      </div>
+      <p class="desc">${s.desc}</p>
+      <div class="aud-line">الفئة المستهدفة: <b>${s.aud}</b></div>
+      <div class="req-ttl">المتطلبات</div>
+      <ul>${reqs}</ul>
+    </button>
+    <div class="drop" id="drop-${i}"><div><div class="phone-slot"></div></div></div>`;
+  el.querySelector(".card-btn").addEventListener("click", () => select(i));
+  list.appendChild(el);
+});
+
+const previewSlot = document.getElementById("preview-slot");
+const previewCap  = document.getElementById("preview-cap");
+const isDesktop = () => matchMedia("(min-width:920px)").matches;
+let current = -1;
+
+function select(i){
+  const cards = document.querySelectorAll(".svc");
+  if (!isDesktop() && current === i){          /* جوال: نقرة ثانية تطوي */
+    cards[i].classList.remove("active");
+    cards[i].querySelector(".card-btn").setAttribute("aria-expanded","false");
+    current = -1; return;
+  }
+  current = i;
+  cards.forEach((c, j) => {
+    c.classList.toggle("active", j === i);
+    c.querySelector(".card-btn").setAttribute("aria-expanded", j === i ? "true" : "false");
+    const slot = c.querySelector(".phone-slot");
+    if (j === i && !slot.innerHTML) slot.innerHTML = screenHTML(SERVICES[i]);
+  });
+  previewSlot.innerHTML = screenHTML(SERVICES[i]);
+  previewCap.textContent = "معاينة: " + SERVICES[i].name;
+}
+
+select(0);   /* افتراضيًا: الخدمة الأولى */
+</script>
