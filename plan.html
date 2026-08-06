@@ -8,7 +8,7 @@
   :root{
     --bg:#ffffff; --ink:#1e3a5f; --navy:#17335a; --gold:#d9a842;
     --muted:#8b94a3; --soft:#f6f8fa; --line:#e8ecf1; --tw:#0f9d63;
-    --orange:#e08a2e; --yellow:#d9b11a;
+    --orange:#e08a2e; --yellow:#d9b11a; --red:#d1453f;
   }
   *{ box-sizing:border-box; }
   html,body{ margin:0; }
@@ -103,10 +103,33 @@
   .stg.wait .dot{ background:var(--yellow); border-color:var(--yellow); color:#fff; box-shadow:0 3px 10px rgba(217,177,26,.35); }
   .stg.wait .lbl{ color:var(--navy); }
 
+  .stg.blocked::before{ background:var(--red); }
+  .stg.blocked .dot{ background:var(--red); border-color:var(--red); color:#fff; box-shadow:0 3px 10px rgba(209,69,63,.32); }
+  .stg.blocked .lbl{ color:var(--navy); }
+
   /* مفتاح الألوان */
   .legend{ display:flex; flex-wrap:wrap; gap:.35rem .95rem; margin:0 .2rem 1rem; }
   .legend span{ display:flex; align-items:center; gap:.35rem; font-size:.7rem; color:var(--muted); font-weight:600; }
   .legend i{ width:9px; height:9px; border-radius:50%; display:block; }
+
+  /* تنويه داخل البطاقة */
+  .note{
+    display:flex; gap:.5rem; align-items:flex-start; margin-top:.85rem;
+    padding:.6rem .7rem; border-radius:11px; font-size:.76rem; line-height:1.6;
+  }
+  .note .ni{ flex:0 0 auto; font-weight:800; font-size:.8rem; line-height:1.5; }
+  .note.warn{ background:#fdf4f3; border:1px solid #f2d8d6; color:#9b3a35; }
+  .note.warn .ni{ color:var(--red); }
+  .note.info{ background:var(--soft); border:1px solid var(--line); color:#5c6774; }
+  .note.info .ni{ color:var(--tw); }
+
+  /* بطاقة معطّلة (خدمة متوفرة مسبقًا) */
+  .svc.off{ background:var(--soft); border-style:dashed; }
+  .svc.off .card-btn{ cursor:default; }
+  .svc.off .num{ background:#aab2bd; color:#fff; }
+  .svc.off h3{ color:#7b8593; }
+  .svc.off .chev{ display:none; }
+  .svc.off .desc, .svc.off .aud-line, .svc.off ul, .svc.off .req-ttl{ opacity:.72; }
 
   /* الانسدال (جوال فقط) */
   .drop{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
@@ -188,6 +211,7 @@
         <span><i style="background:var(--tw)"></i> مكتمل</span>
         <span><i style="background:var(--orange)"></i> قيد العمل</span>
         <span><i style="background:var(--yellow)"></i> قيد المراجعة</span>
+        <span><i style="background:var(--red)"></i> بانتظار توجيه</span>
         <span><i style="background:var(--line)"></i> لم يبدأ</span>
       </div>
       <div id="list"></div>
@@ -239,6 +263,7 @@ const SERVICES = [
   },
   {
     num:"٣", name:"سجل الحضور والانصراف", sys:"حاضر", aud:"جميع منسوبي الجامعة",
+    note:{ type:"warn", text:"بانتظار التوجيه بطلب الـ View من نظام حاضر." },
     desc:"بصمات الموظف اليومية وملخص الدوام الشهري.",
     reqs:[
       ["View Database من نظام حاضر","الموارد البشرية"],
@@ -327,6 +352,7 @@ const SERVICES = [
   },
   {
     num:"٩", name:"بياناتي الوظيفية", sys:"جدير", aud:"جميع منسوبي الجامعة",
+    off:true, note:{ type:"info", text:"هذه الخدمة متوفرة مسبقًا في تطبيق توكلنا، ولا تحتاج إلى إجراء من الجامعة." },
     desc:"المسمى الوظيفي والمرتبة وجهة العمل للموظف.",
     reqs:[
       ["View Database لبيانات الموظفين من نظام جدير","الموارد البشرية"],
@@ -342,6 +368,7 @@ const SERVICES = [
   },
   {
     num:"١٠", name:"رصيد الإجازات", sys:"جدير", aud:"جميع منسوبي الجامعة",
+    off:true, note:{ type:"info", text:"هذه الخدمة متوفرة مسبقًا في تطبيق توكلنا، ولا تحتاج إلى إجراء من الجامعة." },
     desc:"أرصدة إجازات الموظف الاعتيادية والاضطرارية المتبقية.",
     reqs:[
       ["View Database لأرصدة الإجازات من نظام جدير","الموارد البشرية"],
@@ -383,10 +410,11 @@ function screenHTML(s){
 /* مراحل كل خدمة — prog: عدد المراحل المكتملة (0 = كلها معلّقة) */
 const STAGES = ["اعتماد", "المتطلبات", "التنفيذ", "الإطلاق"];
 /* حالة كل مرحلة لكل خدمة — بالترتيب: اعتماد، المتطلبات، التنفيذ، الإطلاق
-   "done" أخضر (مكتمل) · "partial" برتقالي (قيد العمل) · "wait" أصفر (قيد المراجعة) · "" رمادي */
+   "done" أخضر · "partial" برتقالي · "wait" أصفر · "blocked" أحمر · "" رمادي */
 const PROGRESS = {
   0: ["done", "done"],          /* حالة المعدل التراكمي */
   1: ["done", "done"],          /* الجدول الدراسي */
+  2: ["done", "blocked"],       /* سجل الحضور والانصراف */
   3: ["done", "partial"],       /* درجات المواد */
   5: ["done", "partial"],       /* الحالة الأكاديمية */
   7: ["wait", "partial"]        /* مرشدي الأكاديمي */
@@ -400,10 +428,13 @@ SERVICES.forEach((s, i) => {
   const prog = PROGRESS[i] || [];
   const stages = STAGES.map((t, k) =>
     `<div class="stg ${prog[k] || ""}"><span class="dot">✓</span><span class="lbl">${t}</span></div>`).join("");
+  const note = s.note
+    ? `<div class="note ${s.note.type}"><span class="ni">${s.note.type === "warn" ? "!" : "✓"}</span><div>${s.note.text}</div></div>`
+    : "";
   const el = document.createElement("div");
-  el.className = "svc"; el.id = "svc-" + i;
+  el.className = "svc" + (s.off ? " off" : ""); el.id = "svc-" + i;
   el.innerHTML = `
-    <button class="card-btn" aria-expanded="false" aria-controls="drop-${i}">
+    <button class="card-btn" aria-expanded="false" aria-controls="drop-${i}" ${s.off ? "disabled" : ""}>
       <div class="head">
         <span class="num">${s.num}</span><h3>${s.name}</h3>
         <span class="sys">${s.sys}</span><span class="chev">▼</span>
@@ -412,10 +443,11 @@ SERVICES.forEach((s, i) => {
       <div class="aud-line">الفئة المستهدفة: <b>${s.aud}</b></div>
       <div class="req-ttl">المتطلبات</div>
       <ul>${reqs}</ul>
-      <div class="stages" aria-label="مراحل الخدمة">${stages}</div>
+      ${s.off ? "" : `<div class="stages" aria-label="مراحل الخدمة">${stages}</div>`}
+      ${note}
     </button>
     <div class="drop" id="drop-${i}"><div><div class="phone-slot"></div></div></div>`;
-  el.querySelector(".card-btn").addEventListener("click", () => select(i));
+  if (!s.off) el.querySelector(".card-btn").addEventListener("click", () => select(i));
   list.appendChild(el);
 });
 
