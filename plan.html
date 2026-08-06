@@ -8,6 +8,7 @@
   :root{
     --bg:#ffffff; --ink:#1e3a5f; --navy:#17335a; --gold:#d9a842;
     --muted:#8b94a3; --soft:#f6f8fa; --line:#e8ecf1; --tw:#0f9d63;
+    --orange:#e08a2e; --yellow:#d9b11a;
   }
   *{ box-sizing:border-box; }
   html,body{ margin:0; }
@@ -89,9 +90,23 @@
     color:#c8ced7; font-size:.68rem; font-weight:800; transition:all .3s;
   }
   .stg .lbl{ font-size:.62rem; font-weight:700; color:var(--muted); }
+
   .stg.done::before{ background:var(--tw); }
   .stg.done .dot{ background:var(--tw); border-color:var(--tw); color:#fff; box-shadow:0 3px 10px rgba(15,157,99,.35); }
   .stg.done .lbl{ color:var(--navy); }
+
+  .stg.partial::before{ background:var(--orange); }
+  .stg.partial .dot{ background:var(--orange); border-color:var(--orange); color:#fff; box-shadow:0 3px 10px rgba(224,138,46,.35); }
+  .stg.partial .lbl{ color:var(--navy); }
+
+  .stg.wait::before{ background:var(--yellow); }
+  .stg.wait .dot{ background:var(--yellow); border-color:var(--yellow); color:#fff; box-shadow:0 3px 10px rgba(217,177,26,.35); }
+  .stg.wait .lbl{ color:var(--navy); }
+
+  /* مفتاح الألوان */
+  .legend{ display:flex; flex-wrap:wrap; gap:.35rem .95rem; margin:0 .2rem 1rem; }
+  .legend span{ display:flex; align-items:center; gap:.35rem; font-size:.7rem; color:var(--muted); font-weight:600; }
+  .legend i{ width:9px; height:9px; border-radius:50%; display:block; }
 
   /* الانسدال (جوال فقط) */
   .drop{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
@@ -169,6 +184,12 @@
   <div class="layout">
     <div>
       <h2 class="list-head">الخدمات المقترحة <span class="list-hint">انقر الخدمة للمعاينة</span></h2>
+      <div class="legend">
+        <span><i style="background:var(--tw)"></i> مكتمل</span>
+        <span><i style="background:var(--orange)"></i> قيد العمل</span>
+        <span><i style="background:var(--yellow)"></i> قيد المراجعة</span>
+        <span><i style="background:var(--line)"></i> لم يبدأ</span>
+      </div>
       <div id="list"></div>
     </div>
 
@@ -294,17 +315,14 @@ const SERVICES = [
   },
   {
     num:"٨", name:"مرشدي الأكاديمي", sys:"سجلات الطلاب", aud:"طلاب وطالبات الجامعة",
-    desc:"اسم المرشد الأكاديمي للطالب ومكتبه وساعاته المكتبية.",
+    desc:"اسم المرشد الأكاديمي المسنَد للطالب.",
     reqs:[
       ["View Database لبيانات الإرشاد من نظام سجلات الطلاب","عمادة القبول والتسجيل"],
       ["تطوير الخدمة وتصميم الواجهة",""]
     ],
     who:{ n:"عبدالله محمد الشهري", d:"٤٤١٠٢٢٣٧ · الأمن السيبراني CYP" },
     kv:[
-      ["المرشد الأكاديمي","د. فهد القحطاني"],
-      ["المكتب","مبنى ٤ · مكتب ٢١٥"],
-      ["الساعات المكتبية","الأحد والثلاثاء ١٠–١٢"],
-      ["البريد الجامعي","f.alqahtani@uhb.edu.sa"]
+      ["المرشد الأكاديمي","د. فهد القحطاني"]
     ]
   },
   {
@@ -364,17 +382,24 @@ function screenHTML(s){
 
 /* مراحل كل خدمة — prog: عدد المراحل المكتملة (0 = كلها معلّقة) */
 const STAGES = ["اعتماد", "المتطلبات", "التنفيذ", "الإطلاق"];
-/* عدد المراحل المكتملة لكل خدمة (1 = اعتماد، 2 = اعتماد + المتطلبات، ...) */
-const PROGRESS = { 0: 2, 1: 2 };
+/* حالة كل مرحلة لكل خدمة — بالترتيب: اعتماد، المتطلبات، التنفيذ، الإطلاق
+   "done" أخضر (مكتمل) · "partial" برتقالي (قيد العمل) · "wait" أصفر (قيد المراجعة) · "" رمادي */
+const PROGRESS = {
+  0: ["done", "done"],          /* حالة المعدل التراكمي */
+  1: ["done", "done"],          /* الجدول الدراسي */
+  3: ["done", "partial"],       /* درجات المواد */
+  5: ["done", "partial"],       /* الحالة الأكاديمية */
+  7: ["wait", "partial"]        /* مرشدي الأكاديمي */
+};
 
 /* بناء القائمة */
 const list = document.getElementById("list");
 SERVICES.forEach((s, i) => {
   const reqs = s.reqs.map(([r, src]) =>
     `<li>${r}${src ? ` <span class="src">— ${src}</span>` : ""}</li>`).join("");
-  const prog = PROGRESS[i] || 0;
+  const prog = PROGRESS[i] || [];
   const stages = STAGES.map((t, k) =>
-    `<div class="stg ${k < prog ? "done" : ""}"><span class="dot">✓</span><span class="lbl">${t}</span></div>`).join("");
+    `<div class="stg ${prog[k] || ""}"><span class="dot">✓</span><span class="lbl">${t}</span></div>`).join("");
   const el = document.createElement("div");
   el.className = "svc"; el.id = "svc-" + i;
   el.innerHTML = `
